@@ -12,6 +12,7 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Ignore;
 import org.junit.Test;
 
+
 import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
@@ -43,8 +44,7 @@ public class TestPerformance {
      *     highVolumeGetRewards: 100,000 users within 20 minutes:
 	 *          assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	 */
-	
-	@Ignore
+
 	@Test
 	public void highVolumeTrackLocation() {
 		GpsUtil gpsUtil = new GpsUtil();
@@ -67,8 +67,10 @@ public class TestPerformance {
 		System.out.println("highVolumeTrackLocation: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds."); 
 		assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	}
-	
-	@Ignore
+
+
+
+
 	@Test
 	public void highVolumeGetRewards() {
 		GpsUtil gpsUtil = new GpsUtil();
@@ -88,7 +90,8 @@ public class TestPerformance {
 	    allUsers.forEach(u -> rewardsService.calculateRewards(u));
 	    
 		for(User user : allUsers) {
-			assertTrue(user.getUserRewards().size() > 0);
+			assertTrue(user.getUserRewards().size() < 0);
+
 		}
 		stopWatch.stop();
 		tourGuideService.tracker.stopTracking();
