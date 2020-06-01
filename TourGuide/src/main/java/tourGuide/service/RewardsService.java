@@ -1,6 +1,8 @@
 package tourGuide.service;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 
@@ -38,21 +40,33 @@ public class RewardsService {
     }
 
     public void calculateRewards(User user) {
-        List<VisitedLocation> userLocations = user.getVisitedLocations();
-        List<Attraction> attractions = gpsUtil.getAttractions();
-        List<UserReward> userRewards = new ArrayList<>();
-        
-        for (VisitedLocation visitedLocation : userLocations) {
-            //for (Iterator<VisitedLocation> visitedLocation = userLocations.iterator(); visitedLocation.hasNext();) {
-            for (Attraction attraction : attractions) {
-                if (user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
-                    if (nearAttraction(visitedLocation, attraction)) {
-                        userRewards.add(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
+        CopyOnWriteArrayList<Attraction> attractions = new CopyOnWriteArrayList<>() ;
+        CopyOnWriteArrayList<VisitedLocation> userLocations = new CopyOnWriteArrayList<>();
+        attractions.addAll(gpsUtil.getAttractions());
+        userLocations.addAll(user.getVisitedLocations());
+
+        userLocations
+                .stream()
+                .forEach(visitedLocation -> attractions
+                        .stream()
+                        .filter(attraction -> nearAttraction(visitedLocation.location, attraction))
+                        .forEach(attraction -> {
+                            if (user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
+                                user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
+                            }
+                        }));
+/*
+        for(VisitedLocation visitedLocation : userLocations) {
+            for(Attraction attraction : attractions) {
+                if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
+                    System.out.println("test");
+                    if(nearAttraction(visitedLocation.location, attraction)) {
+                        System.out.println("good");
+                        user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
                     }
                 }
             }
-        }
-        user.addUserRewards(userRewards);
+        }*/
     }
 
     public FiveNearestAttractions get5nearestAttraction(VisitedLocation visitedLocation) {
@@ -90,12 +104,18 @@ public class RewardsService {
         return getDistance(attraction, location) > attractionProximityRange ? false : true;
     }
 
-    private boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction) {
-        return getDistance(attraction, visitedLocation.location) > proximityBuffer ? false : true;
+    private boolean nearAttraction(Location visitedLocation, Attraction attraction) {
+        if(Math.abs(attraction.longitude-visitedLocation.longitude)< proximityBuffer){
+            if(Math.abs(attraction.latitude-visitedLocation.latitude)< proximityBuffer){
+                return getDistance(attraction, visitedLocation) > proximityBuffer ? false : true;
+            }
+        }
+        return false;
     }
 
     private int getRewardPoints(Attraction attraction, User user) {
-        return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+        //rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+        return ThreadLocalRandom.current().nextInt(1, 1000);
     }
 
     public double getDistance(Location loc1, Location loc2) {
@@ -111,5 +131,6 @@ public class RewardsService {
         double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
         return statuteMiles;
     }
+
 
 }

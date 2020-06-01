@@ -69,8 +69,8 @@ public class User {
 		visitedLocations.clear();
 	}
 	
-	public void addUserRewards(List<UserReward> userRewards) {
-			userRewards.addAll(userRewards);
+	public void addUserReward(UserReward userReward) {
+			userRewards.add(userReward);
 	}
 	
 	public List<UserReward> getUserRewards() {

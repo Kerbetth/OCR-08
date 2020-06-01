@@ -12,6 +12,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import org.javamoney.moneta.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,12 @@ import tourGuide.domain.UserLocation;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
+import tourGuide.user.UserPreferences;
 import tourGuide.user.UserReward;
 import tripPricer.Provider;
 import tripPricer.TripPricer;
+
+import javax.money.Monetary;
 
 @Service
 public class TourGuideService {
@@ -71,7 +75,7 @@ public class TourGuideService {
             userLocation.setUserID(user.getUserId());
             userLocation.setLatLongUser((user.getVisitedLocations().size() > 0) ?
                     user.getLastVisitedLocation().location :
-                    trackUserLocation(user).location);
+                    null);
             userLocations.add(userLocation);
         }
         return userLocations;
@@ -110,6 +114,12 @@ public class TourGuideService {
         return rewardsService.get5nearestAttraction(visitedLocation);
     }
 
+    public List<Attraction> pertinenteAttractions(User user) {
+        List<Attraction> pertinentAttractions = new ArrayList<>();
+
+        return pertinentAttractions;
+    }
+
     public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
         List<Attraction> nearbyAttractions = new ArrayList<>();
 
@@ -131,6 +141,17 @@ public class TourGuideService {
                 tracker.stopTracking();
             }
         });
+    }
+
+    public void setUserPreferences(String userName, Integer numberOfAdults, Integer numberOfChildren, Integer tripDuration, Integer highPricePoint, Integer lowerPricePoint) {
+        UserPreferences userPreferences = new UserPreferences();
+        userPreferences.setNumberOfAdults(numberOfAdults);
+        userPreferences.setNumberOfChildren(numberOfChildren);
+        userPreferences.setTripDuration(tripDuration);
+        userPreferences.setHighPricePoint(Money.of(highPricePoint, Monetary.getCurrency("USD")));
+        User user= getUser(userName);
+        user.setUserPreferences(userPreferences);
+        internalUserMap.put(userName, user);
     }
 
     /**********************************************************************************
@@ -177,6 +198,5 @@ public class TourGuideService {
         LocalDateTime localDateTime = LocalDateTime.now().minusDays(new Random().nextInt(30));
         return Date.from(localDateTime.toInstant(ZoneOffset.UTC));
     }
-
 
 }

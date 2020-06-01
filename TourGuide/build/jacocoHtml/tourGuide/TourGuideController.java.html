@@ -3,6 +3,7 @@
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,66 +17,79 @@ import tourGuide.user.User;
 import tripPricer.Provider;
 
 @RestController
-<span class="nc" id="L19">public class TourGuideController {</span>
+<span class="nc" id="L20">public class TourGuideController {</span>
 
-	@Autowired
-	TourGuideService tourGuideService;
-	
+    @Autowired
+    TourGuideService tourGuideService;
+
     @RequestMapping(&quot;/&quot;)
     public String index() {
-<span class="nc" id="L26">        return &quot;Greetings from TourGuide!&quot;;</span>
+<span class="nc" id="L27">        return &quot;Greetings from TourGuide!&quot;;</span>
     }
-    
-    @RequestMapping(&quot;/getLocation&quot;) 
+
+    @RequestMapping(&quot;/getLocation&quot;)
     public String getLocation(@RequestParam String userName) {
-<span class="nc" id="L31">    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));</span>
-<span class="nc" id="L32">		return JsonStream.serialize(visitedLocation.location);</span>
+<span class="nc" id="L32">        VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));</span>
+<span class="nc" id="L33">        return JsonStream.serialize(visitedLocation.location);</span>
     }
-    
+
     //  TODO: Change this method to no longer return a List of Attractions.
- 	//  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
- 	//  Return a new JSON object that contains:
-    	// Name of Tourist attraction, 
-        // Tourist attractions lat/long, 
-        // The user's location lat/long, 
-        // The distance in miles between the user's location and each of the attractions.
-        // The reward points for visiting each Attraction.
-        //    Note: Attraction reward points can be gathered from RewardsCentral
-    @RequestMapping(&quot;/getNearbyAttractions&quot;) 
+    //  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
+    //  Return a new JSON object that contains:
+    // Name of Tourist attraction,
+    // Tourist attractions lat/long,
+    // The user's location lat/long,
+    // The distance in miles between the user's location and each of the attractions.
+    // The reward points for visiting each Attraction.
+    //    Note: Attraction reward points can be gathered from RewardsCentral
+    @RequestMapping(&quot;/getNearbyAttractions&quot;)
     public FiveNearestAttractions getNearbyAttractions(@RequestParam String userName) {
-<span class="nc" id="L46">    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));</span>
-<span class="nc" id="L47">    	return tourGuideService.get5NearestAttractions(visitedLocation);</span>
+<span class="nc" id="L47">        VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));</span>
+<span class="nc" id="L48">        return tourGuideService.get5NearestAttractions(visitedLocation);</span>
     }
-    
-    @RequestMapping(&quot;/getRewards&quot;) 
+
+    @RequestMapping(&quot;/getRewards&quot;)
     public String getRewards(@RequestParam String userName) {
-<span class="nc" id="L52">    	return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));</span>
+<span class="nc" id="L53">        return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));</span>
     }
+
+    @PostMapping(&quot;/setUserPreferences&quot;)
+    public void setUserPreferences(
+            @RequestParam String userName,
+            Integer numberOfAdults,
+            Integer numberOfChildren,
+            Integer tripDuration,
+            Integer highPricePoint,
+            Integer lowerPricePoint
+    ) {
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (highPricePoint == 0) {</span>
+<span class="nc" id="L66">            highPricePoint = 999_999;</span>
+        }
+<span class="nc" id="L68">        tourGuideService.setUserPreferences(userName, numberOfAdults, numberOfChildren, tripDuration, highPricePoint, lowerPricePoint);</span>
+<span class="nc" id="L69">    }</span>
 
     @RequestMapping(&quot;/getAllCurrentLocations&quot;)
     public String getAllCurrentLocations() {
-    	// TODO: Get a list of every user's most recent location as JSON
-    	//- Note: does not use gpsUtil to query for their current location, 
-    	//        but rather gathers the user's current location from their stored location history.
-    	//
-    	// Return object should be the just a JSON mapping of userId to Locations similar to:
-    	//     {
-    	//        &quot;019b04a9-067a-4c76-8817-ee75088c3822&quot;: {&quot;longitude&quot;:-48.188821,&quot;latitude&quot;:74.84371} 
-    	//        ...
-    	//     }
-<span class="nc" id="L66">    	return JsonStream.serialize(tourGuideService.getLocationOfAllUsers());</span>
+        // TODO: Get a list of every user's most recent location as JSON
+        //- Note: does not use gpsUtil to query for their current location,
+        //        but rather gathers the user's current location from their stored location history.
+        //
+        // Return object should be the just a JSON mapping of userId to Locations similar to:
+        //     {
+        //        &quot;019b04a9-067a-4c76-8817-ee75088c3822&quot;: {&quot;longitude&quot;:-48.188821,&quot;latitude&quot;:74.84371}
+        //        ...
+        //     }
+<span class="nc" id="L82">        return JsonStream.serialize(tourGuideService.getLocationOfAllUsers());</span>
     }
-    
+
     @RequestMapping(&quot;/getTripDeals&quot;)
     public String getTripDeals(@RequestParam String userName) {
-<span class="nc" id="L71">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(getUser(userName));</span>
-<span class="nc" id="L72">    	return JsonStream.serialize(providers);</span>
+<span class="nc" id="L87">        List&lt;Provider&gt; providers = tourGuideService.getTripDeals(getUser(userName));</span>
+<span class="nc" id="L88">        return JsonStream.serialize(providers);</span>
     }
-    
-    private User getUser(String userName) {
-<span class="nc" id="L76">    	return tourGuideService.getUser(userName);</span>
-    }
-   
 
+    private User getUser(String userName) {
+<span class="nc" id="L92">        return tourGuideService.getUser(userName);</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
