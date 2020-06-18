@@ -1,6 +1,8 @@
 package tourGuide.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,27 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jsoniter.output.JsonStream;
 
 
-import tourGuide.clients.dto.trackerservice.VisitedLocation;
-import tourGuide.domain.FiveNearestAttractions;
-import tourGuide.domain.UserLocation;
-import tourGuide.service.TourGuideService;
-import tourGuide.clients.dto.UserService.User;
+import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
+import tourGuide.clients.dto.trackerservice.Location;
+import tourGuide.clients.dto.trackerservice.UserLocation;
+import tourGuide.domain.User;
+import tourGuide.service.ClientService;
 
 @RestController
 public class TourGuideController {
 
     @Autowired
-    TourGuideService tourGuideService;
+    ClientService clientService;
 
     @RequestMapping("/")
     public String index() {
         return "Greetings from TourGuide!";
-    }
-
-    @RequestMapping("/getLocation")
-    public String getLocation(@RequestParam String userName) {
-        VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-        return JsonStream.serialize(visitedLocation.location);
     }
 
     //  TODO: Change this method to no longer return a List of Attractions.
@@ -46,13 +42,12 @@ public class TourGuideController {
     //    Note: Attraction reward points can be gathered from RewardsCentral
     @RequestMapping("/getNearbyAttractions")
     public FiveNearestAttractions getNearbyAttractions(@RequestParam String userName) {
-        VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-        return tourGuideService.get5NearestAttractions(visitedLocation);
+        return clientService.get5NearestAttraction(userName);
     }
 
     @RequestMapping("/getRewards")
     public String getRewards(@RequestParam String userName) {
-        return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));
+        return JsonStream.serialize(userClient.getUserRewards(getUser(userName)));
     }
 
     @PostMapping("/setUserPreferences")
@@ -67,11 +62,11 @@ public class TourGuideController {
         if (highPricePoint == 0) {
             highPricePoint = 999_999;
         }
-        tourGuideService.setUserPreferences(userName, numberOfAdults, numberOfChildren, tripDuration, highPricePoint, lowerPricePoint);
+        userClient.setUserPreferences(userName, numberOfAdults, numberOfChildren, tripDuration, highPricePoint, lowerPricePoint);
     }
 
     @RequestMapping("/getAllCurrentLocations")
-    public List<UserLocation> getAllCurrentLocations() {
+    public Map<UUID, Location> getAllCurrentLocations() {
         // TODO: Get a list of every user's most recent location as JSON
         //- Note: does not use gpsUtil to query for their current location,
         //        but rather gathers the user's current location from their stored location history.
@@ -81,16 +76,16 @@ public class TourGuideController {
         //        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371}
         //        ...
         //     }
-        return tourGuideService.getLocationOfAllUsers();
+        return clientService.getAllCurrentLocations();
     }
 
     @RequestMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {
-        List<Provider> providers = tourGuideService.getTripDeals(getUser(userName));
+        List<Provider> providers = userClient.getTripDeals(getUser(userName));
         return providers;
     }
 
     private User getUser(String userName) {
-        return tourGuideService.getUser(userName);
+        return userClient.getUser(userName);
     }
 }

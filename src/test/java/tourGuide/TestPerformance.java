@@ -18,11 +18,11 @@ import rewardCentral.RewardCentral;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.service.RewardsService;
 import tourGuide.service.TourGuideService;
-import tourGuide.clients.dto.UserService.User;
+import tourGuide.domain.User;
 
 public class TestPerformance {
 
-    /*
+    /**
      * A note on performance improvements:
      *
      *     The number of users generated for the high volume tests can be easily adjusted via this method:
@@ -40,7 +40,7 @@ public class TestPerformance {
      *
      *     highVolumeGetRewards: 100,000 users within 20 minutes:
      *          assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
-     */
+     **/
 
     @Test
     public void highVolumeTrackLocation() {
