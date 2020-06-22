@@ -3,8 +3,8 @@ package tourGuide.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tourGuide.clients.UserClient;
-import tourGuide.clients.dto.UserService.UserPreferences;
-import tourGuide.clients.dto.UserService.User;
+import tourGuide.clients.dto.userservice.UserPreferences;
+import tourGuide.clients.dto.userservice.User;
 
 import java.net.http.HttpResponse;
 

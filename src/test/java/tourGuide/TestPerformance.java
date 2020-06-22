@@ -18,7 +18,7 @@ import rewardCentral.RewardCentral;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.service.RewardsService;
 import tourGuide.service.TourGuideService;
-import tourGuide.clients.dto.UserService.User;
+import tourGuide.clients.dto.userservice.User;
 
 public class TestPerformance {
 

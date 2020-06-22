@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
-import tourGuide.clients.dto.UserService.User;
+import tourGuide.clients.dto.userservice.User;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.service.MainService;
 

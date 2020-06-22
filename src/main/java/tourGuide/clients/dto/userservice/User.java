@@ -1,7 +1,5 @@
-package tourGuide.clients.dto.UserService;
+package tourGuide.clients.dto.userservice;
 
-import tourGuide.clients.dto.UserService.UserPreferences;
-import tourGuide.clients.dto.UserService.UserReward;
 import tourGuide.clients.dto.pricerreward.Provider;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
 

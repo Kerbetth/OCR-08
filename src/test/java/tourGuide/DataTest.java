@@ -1,7 +1,7 @@
 package tourGuide;
 
 import lombok.extern.slf4j.Slf4j;
-import tourGuide.clients.dto.UserService.User;
+import tourGuide.clients.dto.userservice.User;
 import tourGuide.clients.dto.trackerservice.Attraction;
 
 

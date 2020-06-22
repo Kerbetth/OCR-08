@@ -1,4 +1,4 @@
-package tourGuide.clients.dto.UserService;
+package tourGuide.clients.dto.userservice;
 
 
 import tourGuide.clients.dto.trackerservice.Attraction;
