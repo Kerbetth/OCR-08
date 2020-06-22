@@ -1,20 +1,11 @@
 package tourGuide;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import tourGuide.domain.User;
+import tourGuide.clients.dto.UserService.User;
 import tourGuide.clients.dto.trackerservice.Attraction;
-import tourGuide.clients.dto.trackerservice.Location;
-import tourGuide.clients.dto.trackerservice.VisitedLocation;
 
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.*;
-import java.util.stream.IntStream;
 
 @Slf4j
 public class DataTest {

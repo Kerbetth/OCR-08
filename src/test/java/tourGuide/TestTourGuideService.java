@@ -11,22 +11,22 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
-import tourGuide.domain.User;
+import tourGuide.clients.dto.UserService.User;
 import tourGuide.helper.InternalTestHelper;
-import tourGuide.service.ClientService;
+import tourGuide.service.MainService;
 
 
 public class TestTourGuideService {
 
     @Autowired
-    ClientService clientService;
+    MainService mainService;
 
     @Test
     public void getUserLocation() {
 
 
         User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
-        VisitedLocation visitedLocation = clientService.trackUserLocation(user);
+        VisitedLocation visitedLocation = mainService.trackUserLocation(user);
         tourGuideService.tracker.stopTracking();
         assertTrue(visitedLocation.userId.equals(user.getUserId()));
     }

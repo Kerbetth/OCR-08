@@ -1,4 +1,4 @@
-package tourGuide.domain;
+package tourGuide.clients.dto.UserService;
 
 import tourGuide.clients.dto.UserService.UserPreferences;
 import tourGuide.clients.dto.UserService.UserReward;

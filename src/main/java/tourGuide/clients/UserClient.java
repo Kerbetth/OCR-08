@@ -1,6 +1,7 @@
 package tourGuide.clients;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
@@ -9,12 +10,16 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Repository;
-import tourGuide.clients.dto.trackerservice.Location;
-import tourGuide.domain.User;
+import tourGuide.clients.dto.UserService.UserPreferences;
+import tourGuide.clients.dto.UserService.User;
 
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 
@@ -39,13 +44,13 @@ public class UserClient {
         return null;
     }
 
-    public List<User> getAllUsers() {
-        HttpGet request = new HttpGet("http://localhost:8081/getAllUsers");
+    public List<UUID> getAllUsersUUID() {
+        HttpGet request = new HttpGet("http://localhost:8081/getAllUsersID");
         request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
 
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             ObjectMapper objectMapper = new ObjectMapper();
-            List<User> users = objectMapper.readValue(response.toString(), List.class);
+            List<UUID> users = objectMapper.readValue(response.toString(), List.class);
             return users;
         } catch (Exception e) {
             log.error("cannot send the get http request");
@@ -53,18 +58,35 @@ public class UserClient {
         return null;
     }
 
-    public Map<UUID, Location> getAllCurrentLocations() {
-        HttpGet request = new HttpGet("http://localhost:8081/getAllCurrentLocations");
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
 
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Map<UUID, Location> users = objectMapper.readValue(response.toString(), Map.class);
-            return users;
-        } catch (Exception e) {
-            log.error("cannot send the get http request");
+
+    public HttpResponse<String> setUserPreferences(UserPreferences userPreferences) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = objectMapper
+                    .writeValueAsString(userPreferences);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/setUserPreferences"))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return response;
     }
+
 
 }

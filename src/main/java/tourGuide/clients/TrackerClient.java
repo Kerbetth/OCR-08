@@ -9,9 +9,12 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Repository;
-import tourGuide.domain.User;
 import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourGuide.clients.dto.trackerservice.Location;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 
 @Slf4j
@@ -30,6 +33,20 @@ public class TrackerClient {
             ObjectMapper objectMapper = new ObjectMapper();
             Location location = objectMapper.readValue(response.toString(), Location.class);
             return location;
+        } catch (Exception e) {
+            log.error("cannot send the get http request");
+        }
+        return null;
+    }
+
+    public Map<UUID, Location> getAllCurrentLocations(List<UUID> listUserID) {
+        HttpGet request = new HttpGet("http://localhost:8081/getAllCurrentLocations");
+        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
+
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<UUID, Location> users = objectMapper.readValue(response.toString(), Map.class);
+            return users;
         } catch (Exception e) {
             log.error("cannot send the get http request");
         }
