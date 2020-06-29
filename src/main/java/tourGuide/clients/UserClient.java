@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Repository;
+import tourGuide.clients.dto.trackerservice.VisitedLocation;
 import tourGuide.clients.dto.userservice.UserPreferences;
 import tourGuide.clients.dto.userservice.User;
 
@@ -31,17 +32,37 @@ public class UserClient {
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
     public User getUser(String userName) {
-        HttpGet request = new HttpGet("http://localhost:8081/getUser?userName=" + userName);
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
 
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getUser?userName=" + userName))
+                .build();
+
+        HttpResponse<String> response = null;
+        try {
+            response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+    /*HttpGet request = new HttpGet("http://localhost:8081/getUser?userName=" + userName);
+    request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
         try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            User user = objectMapper.readValue(response.toString(), User.class);
-            return user;
-        } catch (Exception e) {
+            */
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        User user = null;
+        System.out.println(response.body());
+        try {
+            user = objectMapper.readValue(response.body(), User.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
             log.error("cannot send the get http request");
         }
-        return null;
+        return user;
     }
 
     public List<UUID> getAllUsersUUID() {
@@ -58,7 +79,19 @@ public class UserClient {
         return null;
     }
 
+    public List<VisitedLocation> getAllVisitedLocations(String userName) {
+        HttpGet request = new HttpGet("http://localhost:8081/getAllVisitedLocations?userName=" + userName);
+        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
 
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<VisitedLocation> visitedLocations = objectMapper.readValue(response.toString(), List.class);
+            return visitedLocations;
+        } catch (Exception e) {
+            log.error("cannot send the get http request");
+        }
+        return null;
+    }
 
     public HttpResponse<String> setUserPreferences(UserPreferences userPreferences) {
         ObjectMapper objectMapper = new ObjectMapper();

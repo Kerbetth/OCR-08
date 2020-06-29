@@ -9,6 +9,7 @@ import tourGuide.clients.TrackerClient;
 import tourGuide.clients.UserClient;
 import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourGuide.clients.dto.trackerservice.Location;
+import tourGuide.clients.dto.userservice.User;
 
 import java.util.Map;
 import java.util.UUID;
@@ -32,7 +33,9 @@ public class TrackerController {
     //    Note: Attraction reward points can be gathered from RewardsCentral
     @GetMapping("/getNearestAttractions")
     public FiveNearestAttractions getNearestAttractions(@RequestParam String userName) {
-        return trackerClient.get5NearestAttraction(userClient.getUser(userName).getLastVisitedLocation().location);
+        User user = userClient.getUser(userName);
+        return trackerClient.get5NearestAttraction(user.
+                        getVisitedLocations().get(user.getVisitedLocations().size()-1).location);
     }
 
 

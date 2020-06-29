@@ -1,6 +1,7 @@
 package tourGuide.clients;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
@@ -10,8 +11,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Repository;
 import tourGuide.clients.dto.pricerreward.Provider;
+import tourGuide.clients.dto.trackerservice.Attraction;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Slf4j
@@ -35,8 +38,18 @@ public class PricerClient {
         return null;
     }
 
-    public Integer getUserRewards(String userName) {
-        HttpGet request = new HttpGet("http://localhost:8083/getReward");
+    public Integer getUserRewards(Set<Attraction> attractions) {
+
+        ObjectMapper postMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = postMapper
+                    .writeValueAsString(attractions);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        HttpGet request = new HttpGet("http://localhost:8083/calculateRewards?attractions=" + requestBody);
         request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
 
         try (CloseableHttpResponse response = httpClient.execute(request)) {
