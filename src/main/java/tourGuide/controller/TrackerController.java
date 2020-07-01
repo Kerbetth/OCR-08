@@ -33,9 +33,7 @@ public class TrackerController {
     //    Note: Attraction reward points can be gathered from RewardsCentral
     @GetMapping("/getNearestAttractions")
     public FiveNearestAttractions getNearestAttractions(@RequestParam String userName) {
-        User user = userClient.getUser(userName);
-        return trackerClient.get5NearestAttraction(user.
-                        getVisitedLocations().get(user.getVisitedLocations().size()-1).location);
+        return trackerClient.get5NearestAttraction(userClient.getUserLocation(userName));
     }
 
 

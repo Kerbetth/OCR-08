@@ -5,7 +5,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHeaders;
-import org.apache.http.HttpRequest;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -18,13 +17,17 @@ import tourGuide.clients.dto.trackerservice.Location;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
 import tourGuide.clients.dto.userservice.User;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.*;
 
 
 @Slf4j
 @Repository
-public class TrackerClient {
+public class TrackerClient extends SenderClient {
 
     // one instance, reuse
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
@@ -32,7 +35,7 @@ public class TrackerClient {
     public Location getLocation(UUID userId) {
         HttpGet request = new HttpGet(
                 "http://localhost:8082/getLocation?userId="
-                + userId);
+                        + userId);
         request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
         try (CloseableHttpResponse response = httpClient.execute(request)) {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -45,17 +48,28 @@ public class TrackerClient {
     }
 
     public Map<UUID, Location> getAllCurrentLocations(List<UUID> listUserID) {
-        HttpGet request = new HttpGet("http://localhost:8081/getAllCurrentLocations?userId="+listUserID.toString());
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
+        String uuids = listUserID.toString();
+        uuids = uuids.substring(1);
+        uuids = uuids.substring(0,uuids.length()-1);
+        uuids = uuids.replace(" ", "");
 
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Map<UUID, Location> users = objectMapper.readValue(response.toString(), Map.class);
-            return users;
-        } catch (Exception e) {
-            log.error("cannot send the get http request");
+        java.net.http.HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(
+                        "http://localhost:8082/getAllCurrentLocations?userId=" + uuids))
+                .header("Content-Type", "application/json")
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<UUID, Location> uuidLocationMap = null;
+        try {
+            uuidLocationMap = objectMapper.readValue(response.body(), Map.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the getAllCurrentLocations json response");
         }
-        return null;
+        return uuidLocationMap;
     }
 
     public Set<Attraction> getAllVisitedAttraction(List<VisitedLocation> visitedLocations) {
@@ -68,35 +82,54 @@ public class TrackerClient {
             e.printStackTrace();
         }
 
-        HttpUriRequest request = new HttpGet("http://localhost:8081/getAllVisitedAttraction?userId="+requestBody);
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
+        java.net.http.HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(
+                        "http://localhost:8082/getAllVisitedAttraction"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
 
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper getMapper = new ObjectMapper();
-            Set<Attraction> users = getMapper.readValue(response.toString(), Set.class);
-            return users;
-        } catch (Exception e) {
-            log.error("cannot send the get http request");
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Set<Attraction> attractions = null;
+        try {
+            attractions = objectMapper.readValue(response.body(), Set.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the get5NearestAttraction json response");
         }
-        return null;
+        return attractions;
     }
 
     public FiveNearestAttractions get5NearestAttraction(Location location) {
-        HttpGet request = new HttpGet(
-                "http://localhost:8082/get5NearestAttractions?longitude="
-                        + location.longitude
-                        + "&latitude="
-                        + location.latitude);
-        request.addHeader(org.springframework.http.HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
-
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            FiveNearestAttractions fiveNearestAttractions = objectMapper.readValue(response.toString(), FiveNearestAttractions.class);
-            return fiveNearestAttractions;
-        } catch (Exception e) {
-            log.error("cannot send the get http request");
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonLocation = null;
+        try {
+            jsonLocation = mapper.writeValueAsString(location);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        java.net.http.HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(
+                        "http://localhost:8082/get5NearestAttractions"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonLocation))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        FiveNearestAttractions fiveNearestAttractions = null;
+        try {
+            fiveNearestAttractions = objectMapper.readValue(response.body(), FiveNearestAttractions.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the get5NearestAttraction json response");
+        }
+        return fiveNearestAttractions;
     }
+
 
 }

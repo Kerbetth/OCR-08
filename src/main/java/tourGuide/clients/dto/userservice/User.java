@@ -1,5 +1,7 @@
 package tourGuide.clients.dto.userservice;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +28,8 @@ public class User {
     private List<Provider> tripDeals;
 
 
-    public User(UUID userId, String userName) {
+    @JsonCreator
+    public User(@JsonProperty("userId") UUID userId, @JsonProperty("userName") String userName) {
         this.userId = userId;
         this.userName = userName;
     }

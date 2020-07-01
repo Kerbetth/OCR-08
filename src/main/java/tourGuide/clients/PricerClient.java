@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Slf4j
 @Repository
-public class PricerClient {
+public class PricerClient extends SenderClient{
 
     // one instance, reuse
     private final CloseableHttpClient httpClient = HttpClients.createDefault();

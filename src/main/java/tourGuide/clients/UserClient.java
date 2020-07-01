@@ -10,6 +10,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Repository;
+import tourGuide.clients.dto.trackerservice.Location;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
 import tourGuide.clients.dto.userservice.UserPreferences;
 import tourGuide.clients.dto.userservice.User;
@@ -20,22 +21,58 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 
 @Slf4j
 @Repository
-public class UserClient {
+public class UserClient extends SenderClient{
 
     // one instance, reuse
     private final CloseableHttpClient httpClient = HttpClients.createDefault();
 
     public User getUser(String userName) {
-
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/getUser?userName=" + userName))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        User user = null;
+        try {
+            user = objectMapper.readValue(response.body(), User.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the getUser json response");
+        }
+        return user;
+    }
+
+    public List<UUID> getAllUsersUUID() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getAllUsersID"))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<UUID> users = new ArrayList<>();
+        try {
+            users = objectMapper.readValue(response.body(), List.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the getUser json response");
+        }
+        return users;
+    }
+
+    public Location getUserLocation(String userName) {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getUserLocation?userName=" + userName))
                 .build();
 
         HttpResponse<String> response = null;
@@ -48,36 +85,18 @@ public class UserClient {
             ex.printStackTrace();
         }
 
-    /*HttpGet request = new HttpGet("http://localhost:8081/getUser?userName=" + userName);
-    request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            */
-
         ObjectMapper objectMapper = new ObjectMapper();
-        User user = null;
-        System.out.println(response.body());
+        Location location = null;
         try {
-            user = objectMapper.readValue(response.body(), User.class);
+            location = objectMapper.readValue(response.body(), Location.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot send the get http request");
         }
-        return user;
+        return location;
     }
 
-    public List<UUID> getAllUsersUUID() {
-        HttpGet request = new HttpGet("http://localhost:8081/getAllUsersID");
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
 
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<UUID> users = objectMapper.readValue(response.toString(), List.class);
-            return users;
-        } catch (Exception e) {
-            log.error("cannot send the get http request");
-        }
-        return null;
-    }
 
     public List<VisitedLocation> getAllVisitedLocations(String userName) {
         HttpGet request = new HttpGet("http://localhost:8081/getAllVisitedLocations?userName=" + userName);
