@@ -28,9 +28,9 @@ public class PricerController {
     @GetMapping("/getRewards")
     public Integer getRewards(@RequestParam String userName) {
         return pricerClient.getUserRewards(
-                trackerClient.getAllVisitedAttraction(
+                trackerClient.getAllVisitedAttractionId(
                         userClient.getAllVisitedLocations(userName)
-                ));
+                ), userClient.getUserId(userName));
     }
 
 }

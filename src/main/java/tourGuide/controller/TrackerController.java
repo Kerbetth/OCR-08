@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import tourGuide.clients.PricerClient;
 import tourGuide.clients.TrackerClient;
 import tourGuide.clients.UserClient;
 import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
@@ -21,6 +22,8 @@ public class TrackerController {
     TrackerClient trackerClient;
     @Autowired
     UserClient userClient;
+    @Autowired
+    PricerClient pricerClient;
 
     //  TODO: Change this method to no longer return a List of Attractions.
     //  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
@@ -33,7 +36,9 @@ public class TrackerController {
     //    Note: Attraction reward points can be gathered from RewardsCentral
     @GetMapping("/getNearestAttractions")
     public FiveNearestAttractions getNearestAttractions(@RequestParam String userName) {
-        return trackerClient.get5NearestAttraction(userClient.getUserLocation(userName));
+        FiveNearestAttractions fiveNearestAttractions= trackerClient.get5NearestAttraction(userClient.getUserLocation(userName));
+        fiveNearestAttractions.setAttractionRewardPoints(pricerClient.getAttractionRewards(fiveNearestAttractions.getAttractionName()));
+        return fiveNearestAttractions;
     }
 
 

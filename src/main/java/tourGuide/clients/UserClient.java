@@ -50,6 +50,23 @@ public class UserClient extends SenderClient{
         }
         return user;
     }
+    public UUID getUserId(String userName) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getUserId?userName=" + userName))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        UUID user = null;
+        try {
+            user = objectMapper.readValue(response.body(), UUID.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the getUserId json response");
+        }
+        return user;
+    }
 
     public List<UUID> getAllUsersUUID() {
         HttpRequest request = HttpRequest.newBuilder()
@@ -70,20 +87,11 @@ public class UserClient extends SenderClient{
     }
 
     public Location getUserLocation(String userName) {
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/getUserLocation?userName=" + userName))
                 .build();
 
-        HttpResponse<String> response = null;
-        try {
-            response = client.send(request,
-                    HttpResponse.BodyHandlers.ofString());
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
+        HttpResponse<String> response = sendRequest(request);
 
         ObjectMapper objectMapper = new ObjectMapper();
         Location location = null;
@@ -99,17 +107,21 @@ public class UserClient extends SenderClient{
 
 
     public List<VisitedLocation> getAllVisitedLocations(String userName) {
-        HttpGet request = new HttpGet("http://localhost:8081/getAllVisitedLocations?userName=" + userName);
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getAllVisitedLocations?userName=" + userName))
+                .build();
 
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<VisitedLocation> visitedLocations = objectMapper.readValue(response.toString(), List.class);
-            return visitedLocations;
-        } catch (Exception e) {
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<VisitedLocation> visitedLocations = null;
+        try {
+            visitedLocations = objectMapper.readValue(response.body(), List.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
             log.error("cannot send the get http request");
         }
-        return null;
+        return visitedLocations;
     }
 
     public HttpResponse<String> setUserPreferences(UserPreferences userPreferences) {

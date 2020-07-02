@@ -72,7 +72,7 @@ public class TrackerClient extends SenderClient {
         return uuidLocationMap;
     }
 
-    public Set<Attraction> getAllVisitedAttraction(List<VisitedLocation> visitedLocations) {
+    public Set<UUID> getAllVisitedAttractionId(List<VisitedLocation> visitedLocations) {
         ObjectMapper postMapper = new ObjectMapper();
         String requestBody = null;
         try {
@@ -84,7 +84,7 @@ public class TrackerClient extends SenderClient {
 
         java.net.http.HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(
-                        "http://localhost:8082/getAllVisitedAttraction"))
+                        "http://localhost:8082/getAllVisitedAttractions"))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
@@ -92,7 +92,7 @@ public class TrackerClient extends SenderClient {
         HttpResponse<String> response = sendRequest(request);
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Set<Attraction> attractions = null;
+        Set<UUID> attractions = null;
         try {
             attractions = objectMapper.readValue(response.body(), Set.class);
         } catch (JsonProcessingException e) {

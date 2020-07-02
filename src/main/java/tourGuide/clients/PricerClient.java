@@ -12,9 +12,14 @@ import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Repository;
 import tourGuide.clients.dto.pricerreward.Provider;
 import tourGuide.clients.dto.trackerservice.Attraction;
+import tourGuide.clients.dto.trackerservice.VisitedLocation;
 
+import java.net.URI;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 
 @Slf4j
@@ -38,27 +43,35 @@ public class PricerClient extends SenderClient{
         return null;
     }
 
-    public Integer getUserRewards(Set<Attraction> attractions) {
+    public Integer getUserRewards(Set<UUID> attractions, UUID userId) {
+        String uuids = attractions.toString();
+        uuids = uuids.substring(1);
+        uuids = uuids.substring(0,uuids.length()-1);
+        uuids = uuids.replace(" ", "");
 
-        ObjectMapper postMapper = new ObjectMapper();
-        String requestBody = null;
-        try {
-            requestBody = postMapper
-                    .writeValueAsString(attractions);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
 
-        HttpGet request = new HttpGet("http://localhost:8083/calculateRewards?attractions=" + requestBody);
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8083/calculateRewards?attractionsId="+uuids+"&userId="+userId.toString()))
+                .build();
 
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Integer rewardsPoint = objectMapper.readValue(response.toString(), Integer.class);
-            return rewardsPoint;
-        } catch (Exception e) {
-            log.error("cannot send the get http request");
-        }
-        return null;
+        HttpResponse<String> response = sendRequest(request);
+
+        return Integer.parseInt(response.body());
+    }
+
+    public int getAttractionRewards(List<String> attractionName) {
+        String uuids = attractionName.toString();
+        uuids = uuids.substring(1);
+        uuids = uuids.substring(0,uuids.length()-1);
+        uuids = uuids.replace(" ", "");
+
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8083/getAttractionRewards?attractionsName="+uuids))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        return Integer.parseInt(response.body());
     }
 }
