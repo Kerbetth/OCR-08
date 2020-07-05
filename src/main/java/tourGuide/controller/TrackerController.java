@@ -2,16 +2,17 @@ package tourGuide.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tourGuide.clients.PricerClient;
 import tourGuide.clients.TrackerClient;
 import tourGuide.clients.UserClient;
+import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourGuide.clients.dto.trackerservice.Location;
-import tourGuide.clients.dto.userservice.User;
+import tourGuide.clients.dto.trackerservice.VisitedLocation;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,14 +37,13 @@ public class TrackerController {
     //    Note: Attraction reward points can be gathered from RewardsCentral
     @GetMapping("/getNearestAttractions")
     public FiveNearestAttractions getNearestAttractions(@RequestParam String userName) {
-        FiveNearestAttractions fiveNearestAttractions= trackerClient.get5NearestAttraction(userClient.getUserLocation(userName));
+        FiveNearestAttractions fiveNearestAttractions = trackerClient.get5NearestAttraction(userClient.getUserLocation(userName));
         fiveNearestAttractions.setAttractionRewardPoints(pricerClient.getAttractionRewards(fiveNearestAttractions.getAttractionName()));
         return fiveNearestAttractions;
     }
 
-
-    @GetMapping("/getAllCurrentLocations")
-    public Map<UUID, Location> getAllCurrentLocations() {
+    @GetMapping("/getAllCurrentUserLocations")
+    public Map<UUID, Location> getAllCurrentUserLocations() {
         // TODO: Get a list of every user's most recent location as JSON
         //- Note: does not use gpsUtil to query for their current location,
         //        but rather gathers the user's current location from their stored location history.
@@ -56,4 +56,18 @@ public class TrackerController {
         return trackerClient.getAllCurrentLocations(userClient.getAllUsersUUID());
     }
 
+    @GetMapping("/trackUserLocation")
+    public void trackUserLocation(@RequestParam String userName) {
+        UUID userId = userClient.getUserId(userName);
+        VisitedLocation visitedLocation = trackerClient.trackUserLocation(
+                userId
+        );
+        userClient.addUserLocation(
+                userName, visitedLocation
+        );
+        Attraction attraction =trackerClient.getNewVisitedAttraction(visitedLocation.location, userClient.getUserRewards(userName));
+        if (attraction != null) {
+            userClient.addUserReward(userId, pricerClient.generateUserReward(attraction, visitedLocation));
+        }
+    }
 }

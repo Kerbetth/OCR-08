@@ -11,8 +11,10 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Repository;
 import tourGuide.clients.dto.pricerreward.Provider;
+import tourGuide.clients.dto.pricerreward.TripPricerTask;
 import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
+import tourGuide.clients.dto.userservice.UserReward;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
@@ -26,32 +28,50 @@ import java.util.UUID;
 @Repository
 public class PricerClient extends SenderClient{
 
-    // one instance, reuse
-    private final CloseableHttpClient httpClient = HttpClients.createDefault();
+    public List<Provider> getTripDeals(TripPricerTask tripPricerTask, int rewards) {
 
-    public List<Provider> getTripDeals(String userName) {
-        HttpGet request = new HttpGet("http://localhost:8083/getTripDeals");
-        request.addHeader(HttpHeaders.ACCEPT, "MediaType.APPLICATION_JSON_VALUE");
-
-        try (CloseableHttpResponse response = httpClient.execute(request)) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<Provider> users = objectMapper.readValue(response.toString(), List.class);
-            return users;
-        } catch (Exception e) {
-            log.error("cannot send the get http request");
+        ObjectMapper postMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = postMapper
+                    .writeValueAsString(tripPricerTask);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
-        return null;
+
+        java.net.http.HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(
+                        "http://localhost:8083/getTripDeals?rewards=" + rewards))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Provider> attractions = null;
+        try {
+            attractions = objectMapper.readValue(response.body(), List.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the List<Provider> json response");
+        }
+        return attractions;
     }
 
-    public Integer getUserRewards(Set<UUID> attractions, UUID userId) {
-        String uuids = attractions.toString();
-        uuids = uuids.substring(1);
-        uuids = uuids.substring(0,uuids.length()-1);
-        uuids = uuids.replace(" ", "");
+    public int getUserRewardsPoints(List<UserReward> userRewards) {
 
-
+        ObjectMapper postMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = postMapper
+                    .writeValueAsString(userRewards);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8083/calculateRewards?attractionsId="+uuids+"&userId="+userId.toString()))
+                .uri(URI.create("http://localhost:8083/getCumulativeUserRewardPoints"))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);
@@ -67,11 +87,49 @@ public class PricerClient extends SenderClient{
 
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8083/getAttractionRewards?attractionsName="+uuids))
+                .uri(URI.create("http://localhost:8083/getCumulativeAttractionRewardPoints?attractionsName="+uuids))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);
 
         return Integer.parseInt(response.body());
+    }
+
+    public UserReward generateUserReward(Attraction attraction, VisitedLocation visitedLocation) {
+        ObjectMapper postMapper = new ObjectMapper();
+        String attractionBody = null;
+        try {
+            attractionBody = postMapper
+                    .writeValueAsString(attraction);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        String visitedLocationBody = null;
+        try {
+            visitedLocationBody = postMapper
+                    .writeValueAsString(visitedLocation);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        java.net.http.HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(
+                        "http://localhost:8083/generateUserReward"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(attractionBody))
+                .POST(HttpRequest.BodyPublishers.ofString(visitedLocationBody))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        UserReward userReward = null;
+        try {
+            userReward = objectMapper.readValue(response.body(), UserReward.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the List<Provider> json response");
+        }
+        return userReward;
     }
 }

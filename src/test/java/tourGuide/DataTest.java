@@ -1,20 +1,16 @@
 package tourGuide;
 
 import lombok.extern.slf4j.Slf4j;
-import tourGuide.clients.dto.userservice.User;
 import tourGuide.clients.dto.trackerservice.Attraction;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 public class DataTest {
 
     private static int internalUserNumber = 100;
     private static final String tripPricerApiKey = "test-server-api-key";
-
-    private final Map<String, User> internalUserMap = new HashMap<>();
-
     public static void setInternalUserNumber(int internalUserNumber) {
         internalUserNumber = internalUserNumber;
     }

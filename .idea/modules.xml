@@ -6,8 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TourGuide/TourGuide.TourGuide.iml" filepath="$PROJECT_DIR$/.idea/modules/TourGuide/TourGuide.TourGuide.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TourGuide.main.iml" filepath="$PROJECT_DIR$/.idea/modules/TourGuide.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/TourGuide.test.iml" filepath="$PROJECT_DIR$/.idea/modules/TourGuide.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.main.iml" filepath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.test.iml" filepath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.main.iml" filepath="$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.test.iml" filepath="$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.test.iml" />
     </modules>
   </component>
 </project>

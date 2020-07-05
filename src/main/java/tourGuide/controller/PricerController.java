@@ -6,6 +6,7 @@ import tourGuide.clients.PricerClient;
 import tourGuide.clients.TrackerClient;
 import tourGuide.clients.UserClient;
 import tourGuide.clients.dto.pricerreward.Provider;
+import tourGuide.clients.dto.pricerreward.TripPricerTask;
 
 import java.util.List;
 
@@ -21,16 +22,14 @@ public class PricerController {
 
     @GetMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {
-        List<Provider> providers = pricerClient.getTripDeals(userName);
-        return providers;
+        TripPricerTask tripPricerTask = userClient.getTripPricerTask(userName);
+        int rewards = userClient.getCumulativePointsUserRewards(userName);
+        return pricerClient.getTripDeals(tripPricerTask, rewards);
     }
 
-    @GetMapping("/getRewards")
-    public Integer getRewards(@RequestParam String userName) {
-        return pricerClient.getUserRewards(
-                trackerClient.getAllVisitedAttractionId(
-                        userClient.getAllVisitedLocations(userName)
-                ), userClient.getUserId(userName));
+    @GetMapping("/getUserRewardsPoints")
+    public int getUserRewardsPoints(@RequestParam String userName) {
+        return pricerClient.getUserRewardsPoints(
+               userClient.getUserRewards(userName));
     }
-
 }

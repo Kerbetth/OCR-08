@@ -10,7 +10,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d92522a-8e52-43be-a1a7-bef62eb545f6" name="Default Changelist" comment="suppression des la lib">
+    <list default="true" id="5d92522a-8e52-43be-a1a7-bef62eb545f6" name="Default Changelist" comment="readaptation des tests de performance">
+      <change afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/dto/CreateUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/dto/pricerreward/TripPricerTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/controller/IndexControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/controller/PricerControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/controller/TrackerControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/controller/UserControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tourGuide/ConfigurationIT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tourGuide/PerformanceIT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tourGuide/PricerControllerIT.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tourGuide/TrackerControllerIT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" afterDir="false" />
@@ -21,45 +31,119 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jsoniter_jsoniter_0_9_23.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_classmate_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_annotations_2_10_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_core_2_10_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_core_jackson_databind_2_10_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_10_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_10_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_fasterxml_jackson_module_jackson_module_parameter_names_2_10_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_jayway_jsonpath_json_path_2_4_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okhttp3_okhttp_4_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_squareup_okio_okio_2_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_codec_commons_codec_1_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_micrometer_micrometer_core_1_3_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jakarta_activation_jakarta_activation_api_1_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jakarta_annotation_jakarta_annotation_api_1_3_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jakarta_validation_jakarta_validation_api_2_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__jakarta_xml_bind_jakarta_xml_bind_api_2_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_annotation_javax_annotation_api_1_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__javax_money_money_api_1_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__junit_junit_4_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_1_10_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_bytebuddy_byte_buddy_agent_1_10_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minidev_accessors_smart_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minidev_json_smart_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_lang3_3_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpclient_4_5_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpcore_4_4_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_logging_log4j_log4j_api_2_12_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_logging_log4j_log4j_to_slf4j_2_12_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_core_9_0_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_el_9_0_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_assertj_assertj_core_3_13_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hdrhistogram_HdrHistogram_2_1_11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_hibernate_validator_hibernate_validator_6_0_18_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_javamoney_moneta_moneta_core_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jboss_logging_jboss_logging_3_4_1_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_annotations_13_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_1_3_71.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jetbrains_kotlin_kotlin_stdlib_common_1_3_71.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_json_json_20190722.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_params_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_junit_vintage_junit_vintage_engine_5_5_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_latencyutils_LatencyUtils_2_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mockito_mockito_core_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_mockito_mockito_junit_jupiter_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_objenesis_objenesis_2_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_opentest4j_opentest4j_1_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_5_0_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_projectlombok_lombok_1_18_12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_skyscreamer_jsonassert_1_5_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_jul_to_slf4j_1_7_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_7_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_actuator_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_actuator_autoconfigure_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_autoconfigure_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_actuator_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_json_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_logging_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_test_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_tomcat_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_validation_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_starter_web_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_test_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_boot_spring_boot_test_autoconfigure_2_2_6_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_aop_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_beans_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_context_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_core_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_expression_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_jcl_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_test_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_web_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_springframework_spring_webmvc_5_2_5_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_xmlunit_xmlunit_core_2_6_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_yaml_snakeyaml_1_25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide_Client.TourGuide.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/TourGuideController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/TourGuideModule.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/domain/FiveNearestAttractions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/domain/UserLocation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/helper/InternalTestHelper.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/helper/InternalTestHelper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/service/RewardsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/service/TourGuideService$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/service/TourGuideService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/tracker/Tracker.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/user/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/user/UserPreferences.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/user/UserReward.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/tourGuide/TestPerformance.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/tourGuide/TestRewardsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/test/tourGuide/TestTourGuideService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacoco/test.exec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/classes/tourGuide.TestPerformance.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/base-style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/js/report.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/tests/test/packages/tourGuide.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/TEST-tourGuide.TestPerformance.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/output.bin.idx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/test-results/test/binary/results.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/PricerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/PricerClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/TrackerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/TrackerClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/UserClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/dto/userservice/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/dto/userservice/UserReward.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/dto/userservice/UserReward.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/PricerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/PricerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/TrackerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/TrackerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/TestPerformance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tourGuide/TestPerformance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/helper/InternalTestHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/helper/InternalTestHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/DataTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tourGuide/DataTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/TestPerformance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/TestRewardsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/TestTourGuideService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tourGuide/UserControllerIT.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,40 +212,50 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/test" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TourGuide_Reward" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/main/java/tourGuide/service/RewardsService.java" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="tourGuide.clients" />
-      <recent name="tourGuide.controller" />
       <recent name="tourGuide" />
-      <recent name="tourGuide.domain" />
+      <recent name="tourGuide.clients" />
+      <recent name="controller" />
+      <recent name="tourGuide.clients.dto.pricerreward" />
+      <recent name="tourGuide.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\dufeu\eclipse-workspace\OCR-08\TourGuide_client\src\test\java" />
       <recent name="C:\Users\dufeu\eclipse-workspace\OCR-08\TourGuide_client\TourGuide_Client\src\test" />
       <recent name="C:\Users\dufeu\eclipse-workspace\OCR-08\TourGuide_client\TourGuide_Client\src\main\java\tourGuide\clients\dto\trackerservice" />
       <recent name="C:\Users\dufeu\eclipse-workspace\OCR-08\TourGuide_client\TourGuide_Client\src\main\java\tourGuide" />
       <recent name="C:\Users\Maduwin\eclipse-workspace\OCR-08\TourGuide" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application (1)">
-    <configuration name="TestPerformance" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Gradle.IndexControllerTest">
+    <configuration name="IndexControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;tourGuide.TestPerformance&quot;" />
+        <option name="scriptParameters" value="--tests &quot;controller.IndexControllerTest&quot; --info" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
+            <option value=":cleanTest" />
             <option value=":test" />
           </list>
         </option>
@@ -170,17 +264,18 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="TestRewardsService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PricerControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;tourGuide.TestRewardsService&quot;" />
+        <option name="scriptParameters" value="--tests &quot;controller.PricerControllerTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
+            <option value=":cleanTest" />
             <option value=":test" />
           </list>
         </option>
@@ -228,21 +323,21 @@
       <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="TourGuide_Client.TourGuide.main" />
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="TourGuide.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="tourGuide.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="TourGuide_client.TourGuide.main" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="tourGuide.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="tourGuide.Application" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="TourGuide.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="tourGuide.Application" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -498,11 +593,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Application (1)" />
+        <item itemvalue="Gradle.IndexControllerTest" />
+        <item itemvalue="Gradle.PricerControllerTest" />
         <item itemvalue="Gradle.Tests in 'TourGuide'" />
         <item itemvalue="Gradle.Tests in 'tourGuide'" />
-        <item itemvalue="Gradle.Tests in 'TourGuide'" />
-        <item itemvalue="Gradle.TestRewardsService" />
       </list>
     </recent_temporary>
   </component>
@@ -511,7 +605,12 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -580,7 +679,10 @@
       <workItem from="1593449510370" duration="926000" />
       <workItem from="1593451236186" duration="2623000" />
       <workItem from="1593586451869" duration="20618000" />
-      <workItem from="1593671443999" duration="435000" />
+      <workItem from="1593671443999" duration="6902000" />
+      <workItem from="1593760010086" duration="8188000" />
+      <workItem from="1593770317863" duration="16149000" />
+      <workItem from="1593931806703" duration="16688000" />
     </task>
     <task id="LOCAL-00001" summary="&quot;mise à jour des parametres gradle&quot;">
       <created>1587560797976</created>
@@ -645,7 +747,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593598291880</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="modification du controller getReward">
+      <created>1593672101217</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1593672101217</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,6 +775,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
     <MESSAGE value="&quot;mise à jour des parametres gradle&quot;" />
     <MESSAGE value="&quot;ajouts de la commande pour les 5 plus proches attractions&quot;" />
     <MESSAGE value="&quot;optimisatioin du code de distribution des rewards&quot;" />
@@ -675,7 +787,9 @@
     <MESSAGE value="suppression des la lib" />
     <MESSAGE value="Correction sur la methode client getUser" />
     <MESSAGE value="mise en place de requetes avec le service tracker" />
-    <option name="LAST_COMMIT_MESSAGE" value="mise en place de requetes avec le service tracker" />
+    <MESSAGE value="modification du controller getReward" />
+    <MESSAGE value="readaptation des tests de performance" />
+    <option name="LAST_COMMIT_MESSAGE" value="readaptation des tests de performance" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="184" key="#Notifications" timestamp="1592815686525">
@@ -690,66 +804,66 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="714" y="327" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1587716085255" />
-    <state x="765" y="209" key="#com.intellij.ide.util.MemberChooser" timestamp="1593444337311">
+    <state x="765" y="209" key="#com.intellij.ide.util.MemberChooser" timestamp="1593948062571">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="765" y="209" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1593444337311" />
+    <state x="765" y="209" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1593948062571" />
     <state x="808" y="414" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1591725968669">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="808" y="414" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1591725968669" />
-    <state x="523" y="451" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1592486053142">
+    <state x="523" y="451" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593773617472">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="523" y="451" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1592486053142" />
-    <state x="313" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1592764706954">
+    <state x="523" y="451" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1593773617472" />
+    <state x="313" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1593947945768">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="313" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1592764706954" />
-    <state x="393" y="119" key="CommitChangelistDialog2" timestamp="1593598290926">
+    <state x="313" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1593947945768" />
+    <state x="164" y="47" width="1595" height="983" key="CommitChangelistDialog2" timestamp="1593950859555">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="393" y="119" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1593598290926" />
+    <state x="164" y="47" width="1595" height="983" key="CommitChangelistDialog2/0.0.1920.1050@0.0.1920.1050" timestamp="1593950859555" />
     <state x="39" y="252" width="1736" height="866" key="DiffContextDialog" timestamp="1590576946247">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="39" y="252" width="1736" height="866" key="DiffContextDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1590576946247" />
-    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1591090913496">
+    <state x="740" y="280" key="FileChooserDialogImpl" timestamp="1593791322473">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1591090913496" />
-    <state width="1877" height="340" key="GridCell.Tab.0.bottom" timestamp="1593629332222">
+    <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1593791322473" />
+    <state width="1877" height="327" key="GridCell.Tab.0.bottom" timestamp="1593770306440">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332222" />
-    <state width="1877" height="340" key="GridCell.Tab.0.center" timestamp="1593629332222">
+    <state width="1877" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593770306440" />
+    <state width="1877" height="327" key="GridCell.Tab.0.center" timestamp="1593770306440">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332222" />
-    <state width="1877" height="340" key="GridCell.Tab.0.left" timestamp="1593629332222">
+    <state width="1877" height="327" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593770306440" />
+    <state width="1877" height="327" key="GridCell.Tab.0.left" timestamp="1593770306440">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332222" />
-    <state width="1877" height="340" key="GridCell.Tab.0.right" timestamp="1593629332222">
+    <state width="1877" height="327" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593770306440" />
+    <state width="1877" height="327" key="GridCell.Tab.0.right" timestamp="1593770306440">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332222" />
-    <state width="1877" height="340" key="GridCell.Tab.1.bottom" timestamp="1593629332223">
+    <state width="1877" height="327" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593770306440" />
+    <state width="1293" height="355" key="GridCell.Tab.1.bottom" timestamp="1593678912273">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332223" />
-    <state width="1877" height="340" key="GridCell.Tab.1.center" timestamp="1593629332222">
+    <state width="1293" height="355" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1593678912273" />
+    <state width="1293" height="355" key="GridCell.Tab.1.center" timestamp="1593678912273">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332222" />
-    <state width="1877" height="340" key="GridCell.Tab.1.left" timestamp="1593629332222">
+    <state width="1293" height="355" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1593678912273" />
+    <state width="1293" height="355" key="GridCell.Tab.1.left" timestamp="1593678912273">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332222" />
-    <state width="1877" height="340" key="GridCell.Tab.1.right" timestamp="1593629332222">
+    <state width="1293" height="355" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1593678912273" />
+    <state width="1293" height="355" key="GridCell.Tab.1.right" timestamp="1593678912273">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="340" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593629332222" />
+    <state width="1293" height="355" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1593678912273" />
     <state x="184" y="93" key="MergeDialog" timestamp="1592473633389">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -758,22 +872,22 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="672" y="242" key="MultipleFileMergeDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1592473931177" />
-    <state x="465" y="26" width="998" height="952" key="SettingsEditor" timestamp="1592474023221">
+    <state x="465" y="26" width="998" height="952" key="SettingsEditor" timestamp="1593775718178">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="465" y="26" width="998" height="952" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1592474023221" />
+    <state x="465" y="26" width="998" height="952" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1593775718178" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1593596382436">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1050@0.0.1920.1050" timestamp="1593596382436" />
-    <state x="422" y="214" key="Vcs.Push.Dialog.v2" timestamp="1593598297309">
+    <state x="422" y="214" key="Vcs.Push.Dialog.v2" timestamp="1593672138569">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="422" y="214" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1593598297309" />
-    <state x="656" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1592549802243">
+    <state x="422" y="214" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1593672138569" />
+    <state x="656" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1593931859582">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="656" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1592549802243" />
+    <state x="656" y="349" key="com.intellij.ide.util.TipDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1593931859582" />
     <state x="921" y="90" width="607" height="795" key="find.popup" timestamp="1593263184885">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -782,6 +896,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="682" y="239" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1592473923524" />
+    <state x="666" y="154" key="refactoring.ChangeSignatureDialog" timestamp="1593787307236">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="666" y="154" key="refactoring.ChangeSignatureDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1593787307236" />
     <state x="616" y="243" key="run.anything.popup" timestamp="1590653808217">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
