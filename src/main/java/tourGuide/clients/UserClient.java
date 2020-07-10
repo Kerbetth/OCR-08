@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import tourGuide.clients.dto.CreateUser;
+import tourGuide.clients.dto.SetUserPreferences;
 import tourGuide.clients.dto.pricerreward.TripPricerTask;
 import tourGuide.clients.dto.trackerservice.Location;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
@@ -26,85 +27,12 @@ import java.util.UUID;
 @Repository
 public class UserClient extends SenderClient {
 
-    public UUID getUserId(String userName) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getUserId?userName=" + userName))
-                .build();
-
-        HttpResponse<String> response = sendRequest(request);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        UUID user = null;
-        try {
-            user = objectMapper.readValue(response.body(), UUID.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            log.error("cannot read the getUserId json response");
-        }
-        return user;
-    }
-
-    public List<UUID> getAllUsersUUID() {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getAllUsersID"))
-                .build();
-
-        HttpResponse<String> response = sendRequest(request);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<UUID> users = new ArrayList<>();
-        try {
-            users = objectMapper.readValue(response.body(), List.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            log.error("cannot read the getUser json response");
-        }
-        return users;
-    }
-
-    public Location getUserLocation(String userName) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getUserLocation?userName=" + userName))
-                .build();
-
-        HttpResponse<String> response = sendRequest(request);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Location location = null;
-        try {
-            location = objectMapper.readValue(response.body(), Location.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            log.error("cannot send the get http request");
-        }
-        return location;
-    }
-
-
-    public List<VisitedLocation> getAllVisitedLocations(String userName) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getAllVisitedLocations?userName=" + userName))
-                .build();
-
-        HttpResponse<String> response = sendRequest(request);
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<VisitedLocation> visitedLocations = null;
-        try {
-            visitedLocations = objectMapper.readValue(response.body(), List.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            log.error("cannot send the get http request");
-        }
-        return visitedLocations;
-    }
-
-    public HttpResponse<String> setUserPreferences(UserPreferences userPreferences) {
+    public HttpResponse<String> setUserPreferences(SetUserPreferences pref) {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = null;
         try {
             requestBody = objectMapper
-                    .writeValueAsString(userPreferences);
+                    .writeValueAsString(pref);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -127,6 +55,125 @@ public class UserClient extends SenderClient {
         return response;
     }
 
+    public void addUser(CreateUser createUser) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = objectMapper
+                    .writeValueAsString(createUser);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/addUser"))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+    }
+
+    public void addUserLocation(String uuid, VisitedLocation trackUserLocation) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = objectMapper
+                    .writeValueAsString(trackUserLocation);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/addUserLocation?userId=" + uuid))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+    }
+
+    public void addUserReward(String userID, UserReward userReward) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String requestBody = null;
+        try {
+            requestBody = objectMapper
+                    .writeValueAsString(userReward);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/addUserReward?userId=" + userID))
+                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .build();
+    }
+
+    public UUID getUserId(String userName) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getUserId?userName=" + userName))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        UUID user = null;
+        try {
+            user = objectMapper.readValue(response.body(), UUID.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the getUserId json response");
+        }
+        return user;
+    }
+
+    public Location getUserLocation(String userName) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getUserLocation?userName=" + userName))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Location location = null;
+        try {
+            location = objectMapper.readValue(response.body(), Location.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot send the get http request");
+        }
+        return location;
+    }
+
+    public List<String> getAllUsersUUID() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getAllUsersID"))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<String> users = new ArrayList<>();
+        try {
+            users = objectMapper.readValue(response.body(), List.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the getUser json response");
+        }
+        return users;
+    }
+
+    public List<VisitedLocation> getAllVisitedLocations(String userName) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getAllVisitedLocations?userName=" + userName))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<VisitedLocation> visitedLocations = null;
+        try {
+            visitedLocations = objectMapper.readValue(response.body(), List.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot send the get http request");
+        }
+        return visitedLocations;
+    }
 
     public TripPricerTask getTripPricerTask(String userName) {
         HttpRequest request = HttpRequest.newBuilder()
@@ -146,6 +193,23 @@ public class UserClient extends SenderClient {
         return tripPricerTask;
     }
 
+    public List<UserReward> getUserRewards(String uuid) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getUserRewards?userId=" + uuid))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+        List<UserReward> userRewards = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            userRewards = objectMapper.readValue(response.body(), List.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            log.error("cannot read the getAllUsersName json response");
+        }
+        return userRewards;
+    }
+
     public int getCumulativePointsUserRewards(String userName) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/getUserRewards?userName=" + userName))
@@ -155,6 +219,7 @@ public class UserClient extends SenderClient {
         return Integer.parseInt(response.body());
     }
 
+/*
     public UserPreferences getUserPreferences(String userName) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/getUserPreferences?userName=" + userName))
@@ -170,72 +235,9 @@ public class UserClient extends SenderClient {
             log.error("cannot read the getAllUsersName json response");
         }
         return userPreferences;
-    }
+    }*/
 
-    public List<UserReward> getUserRewards(String userName) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getUserRewards?userName=" + userName))
-                .build();
 
-        HttpResponse<String> response = sendRequest(request);
-        List<UserReward> userRewards = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            userRewards = objectMapper.readValue(response.body(), List.class);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            log.error("cannot read the getAllUsersName json response");
-        }
-        return userRewards;
-    }
-
-    public void addUserLocation(String userName, VisitedLocation trackUserLocation) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = null;
-        try {
-            requestBody = objectMapper
-                    .writeValueAsString(trackUserLocation);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/addUserLocation?userName=" + userName))
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
-    }
-
-    public void addUserReward(UUID uuid, UserReward userReward) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = null;
-        try {
-            requestBody = objectMapper
-                    .writeValueAsString(userReward);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/addUserReward?userID=" + uuid))
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
-    }
-
-    public void addUser(CreateUser createUser) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = null;
-        try {
-            requestBody = objectMapper
-                    .writeValueAsString(createUser);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
-        HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/addUser"))
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
-                .build();
-    }
 
     /**
      * test methods
@@ -256,6 +258,7 @@ public class UserClient extends SenderClient {
             e.printStackTrace();
             log.error("cannot read the getAllUsersName json response");
         }
+        System.out.println("test");
         return userName;
     }
 

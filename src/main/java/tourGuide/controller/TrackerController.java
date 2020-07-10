@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 import tourGuide.clients.PricerClient;
 import tourGuide.clients.TrackerClient;
 import tourGuide.clients.UserClient;
+import tourGuide.clients.dto.TrackerResponse;
 import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourGuide.clients.dto.trackerservice.Location;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -38,10 +38,10 @@ public class TrackerController {
     @GetMapping("/getNearestAttractions")
     public FiveNearestAttractions getNearestAttractions(@RequestParam String userName) {
         FiveNearestAttractions fiveNearestAttractions = trackerClient.get5NearestAttraction(userClient.getUserLocation(userName));
-        fiveNearestAttractions.setAttractionRewardPoints(pricerClient.getAttractionRewards(fiveNearestAttractions.getAttractionName()));
+        fiveNearestAttractions.setAttractionRewardPoints(pricerClient.getAttractionRewardsPoint(fiveNearestAttractions.getAttractionName()));
         return fiveNearestAttractions;
     }
-
+/*
     @GetMapping("/getAllCurrentUserLocations")
     public Map<UUID, Location> getAllCurrentUserLocations() {
         // TODO: Get a list of every user's most recent location as JSON
@@ -53,21 +53,15 @@ public class TrackerController {
         //        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371}
         //        ...
         //     }
-        return trackerClient.getAllCurrentLocations(userClient.getAllUsersUUID());
-    }
+        return trackerClient.getCurrentLocationOfAllUsers(userClient.getAllUsersUUID());
+    }*/
 
     @GetMapping("/trackUserLocation")
-    public void trackUserLocation(@RequestParam String userName) {
-        UUID userId = userClient.getUserId(userName);
-        VisitedLocation visitedLocation = trackerClient.trackUserLocation(
-                userId
-        );
-        userClient.addUserLocation(
-                userName, visitedLocation
-        );
-        Attraction attraction =trackerClient.getNewVisitedAttraction(visitedLocation.location, userClient.getUserRewards(userName));
-        if (attraction != null) {
-            userClient.addUserReward(userId, pricerClient.generateUserReward(attraction, visitedLocation));
+    public void trackUserLocation(@RequestParam String userID) {
+        TrackerResponse trackerResponse = trackerClient.trackUserLocation(userID, userClient.getUserRewards(userID));
+        userClient.addUserLocation(userID, trackerResponse.visitedLocation);
+        if (trackerResponse.attraction != null) {
+            userClient.addUserReward(userID, pricerClient.generateUserReward(trackerResponse));
         }
     }
 }

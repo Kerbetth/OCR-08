@@ -26,10 +26,4 @@ public class PricerController {
         int rewards = userClient.getCumulativePointsUserRewards(userName);
         return pricerClient.getTripDeals(tripPricerTask, rewards);
     }
-
-    @GetMapping("/getUserRewardsPoints")
-    public int getUserRewardsPoints(@RequestParam String userName) {
-        return pricerClient.getUserRewardsPoints(
-               userClient.getUserRewards(userName));
-    }
 }
