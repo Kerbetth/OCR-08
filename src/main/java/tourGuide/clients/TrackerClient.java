@@ -26,19 +26,22 @@ import java.util.UUID;
 public class TrackerClient extends SenderClient {
 
 
-    public TrackerResponse trackUserLocation(String userId, List<UserReward> userRewards) {
+    public TrackerResponse trackUserLocation(String userId, List<String> attractionId) {
         ObjectMapper mapper = new ObjectMapper();
-        String jsonRewards = null;
-        try {
-            jsonRewards = mapper.writeValueAsString(userRewards);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+        String jsonAttractionId = "[]";
+        if(!attractionId.isEmpty()) {
+            try {
+                jsonAttractionId = mapper.writeValueAsString(attractionId);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
         }
         java.net.http.HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(
                         "http://localhost:8082/trackUserLocation?userId=" + userId))
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonRewards))
+                //.version(HttpClient.Version.HTTP_1_1)
+                .POST(HttpRequest.BodyPublishers.ofString(jsonAttractionId))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);

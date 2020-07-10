@@ -8,13 +8,7 @@ import tourGuide.clients.PricerClient;
 import tourGuide.clients.TrackerClient;
 import tourGuide.clients.UserClient;
 import tourGuide.clients.dto.TrackerResponse;
-import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
-import tourGuide.clients.dto.trackerservice.Location;
-import tourGuide.clients.dto.trackerservice.VisitedLocation;
-
-import java.util.Map;
-import java.util.UUID;
 
 @RestController
 public class TrackerController {
@@ -58,7 +52,7 @@ public class TrackerController {
 
     @GetMapping("/trackUserLocation")
     public void trackUserLocation(@RequestParam String userID) {
-        TrackerResponse trackerResponse = trackerClient.trackUserLocation(userID, userClient.getUserRewards(userID));
+        TrackerResponse trackerResponse = trackerClient.trackUserLocation(userID, userClient.getVisitedAttractionId(userID));
         userClient.addUserLocation(userID, trackerResponse.visitedLocation);
         if (trackerResponse.attraction != null) {
             userClient.addUserReward(userID, pricerClient.generateUserReward(trackerResponse));

@@ -59,7 +59,7 @@ public class Tracker extends Thread {
 			List<String> users = userClient.getAllUsersUUID();
 			log.debug("Begin Tracker. Tracking " + users.size() + " users.");
 			stopWatch.start();
-			users.forEach(u -> trackerClient.trackUserLocation(u, userClient.getUserRewards(u)));
+			users.forEach(u -> trackerClient.trackUserLocation(u, userClient.getVisitedAttractionId(u)));
 			stopWatch.stop();
 			log.debug("Tracker Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
 			stopWatch.reset();

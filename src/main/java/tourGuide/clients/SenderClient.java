@@ -15,9 +15,8 @@ import java.net.http.HttpResponse;
 public class SenderClient {
     protected HttpResponse<String> sendRequest(HttpRequest httpRequest){
         HttpResponse<String> response = null;
-        HttpClient client = HttpClient.newHttpClient();
         try {
-            response = client.send(httpRequest,
+            response = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build().send(httpRequest,
                     HttpResponse.BodyHandlers.ofString());
         } catch (IOException ex) {
             ex.printStackTrace();

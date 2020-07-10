@@ -10,10 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5d92522a-8e52-43be-a1a7-bef62eb545f6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/dto/SetUserPreferences.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/dto/TrackerResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/tourGuide/tracker/Tracker.java" afterDir="false" />
+    <list default="true" id="5d92522a-8e52-43be-a1a7-bef62eb545f6" name="Default Changelist" comment="mise à jour des tests de PerformanceIT">
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/fileHashes/fileHashes.bin" afterDir="false" />
@@ -24,92 +21,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.3/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide/TourGuide.TourGuide.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/TourGuide_client.TourGuide.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/tourGuide/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/tourGuide/helper/InternalTestHelper.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/jacocoHtml/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/prettify.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/prettify.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/prettify.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/prettify.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/report.css" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/report.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/sort.js" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/jacoco-resources/sort.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/jacocoHtml/jacoco-sessions.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/jacoco-sessions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.domain/FiveNearestAttractions.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.domain/FiveNearestAttractions.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.domain/UserLocation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.domain/UserLocation.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.domain/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.domain/index.source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.helper/InternalTestHelper.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.helper/InternalTestHelper.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.helper/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.helper/index.source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.service/RewardsService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.service/RewardsService.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.service/TourGuideService$1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.service/TourGuideService.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.service/TourGuideService.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.service/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.service/index.source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/Tracker.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/Tracker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/Tracker.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/Tracker.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.tracker/index.source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/User.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/User.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/UserPreferences.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/UserPreferences.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/UserReward.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/UserReward.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide.user/index.source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/Application.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/Application.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/Application.java.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/Application.java.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/TourGuideController.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/TourGuideController.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/TourGuideModule.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/TourGuideModule.java.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/index.source.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/jacocoHtml/tourGuide/index.source.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reports/jacoco/test/jacocoTestReport.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/jacoco/test/jacocoTestReport.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/PricerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/PricerClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/SenderClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/SenderClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/TrackerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/TrackerClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/clients/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/clients/UserClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/PricerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/PricerController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/TrackerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/TrackerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/IndexControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/unit/IndexControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/PricerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/unit/PricerControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/TrackerControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/unit/TrackerControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/controller/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/unit/UserControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/helper/InternalTestHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/ConfigurationIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/integration/ConfigurationIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/DataTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/PerformanceIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/integration/PerformanceIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/PricerControllerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/integration/PricerControllerIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/TrackerControllerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/integration/TrackerControllerIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tourGuide/UserControllerIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/integration/UserControllerIT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/tourGuide/tracker/Tracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tourGuide/tracker/Tracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/integration/PerformanceIT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/integration/PerformanceIT.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +131,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.PerformanceIT">
+  <component name="RunManager" selected="Gradle.PerformanceIT.highVolumeTrackLocation">
     <configuration default="true" type="TomeeConfiguration" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8081/" />
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -581,8 +502,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PerformanceIT" />
         <item itemvalue="Gradle.PerformanceIT.highVolumeTrackLocation" />
+        <item itemvalue="Gradle.PerformanceIT" />
         <item itemvalue="Application.Application" />
         <item itemvalue="Gradle.PerformanceIT" />
         <item itemvalue="Gradle.IndexControllerTest" />
@@ -737,7 +658,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593950951448</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="mise à jour des tests de PerformanceIT">
+      <created>1594384754344</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1594384754344</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -773,7 +701,8 @@
     <MESSAGE value="mise en place de requetes avec le service tracker" />
     <MESSAGE value="modification du controller getReward" />
     <MESSAGE value="readaptation des tests de performance" />
-    <option name="LAST_COMMIT_MESSAGE" value="readaptation des tests de performance" />
+    <MESSAGE value="mise à jour des tests de PerformanceIT" />
+    <option name="LAST_COMMIT_MESSAGE" value="mise à jour des tests de PerformanceIT" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="184" key="#Notifications" timestamp="1592815686525">
@@ -820,22 +749,22 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="740" y="280" key="FileChooserDialogImpl/0.0.1920.1050@0.0.1920.1050" timestamp="1593791322473" />
-    <state width="1877" height="335" key="GridCell.Tab.0.bottom" timestamp="1594384629291">
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom" timestamp="1594402443228">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1594384629291" />
-    <state width="1877" height="335" key="GridCell.Tab.0.center" timestamp="1594384629291">
+    <state width="1877" height="314" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1594402443228" />
+    <state width="1877" height="314" key="GridCell.Tab.0.center" timestamp="1594402443228">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1594384629291" />
-    <state width="1877" height="335" key="GridCell.Tab.0.left" timestamp="1594384629290">
+    <state width="1877" height="314" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1594402443228" />
+    <state width="1877" height="314" key="GridCell.Tab.0.left" timestamp="1594402443228">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1594384629290" />
-    <state width="1877" height="335" key="GridCell.Tab.0.right" timestamp="1594384629291">
+    <state width="1877" height="314" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1594402443228" />
+    <state width="1877" height="314" key="GridCell.Tab.0.right" timestamp="1594402443228">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state width="1877" height="335" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1594384629291" />
+    <state width="1877" height="314" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1594402443228" />
     <state width="1877" height="284" key="GridCell.Tab.1.bottom" timestamp="1594295336024">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -860,18 +789,18 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="672" y="242" key="MultipleFileMergeDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1592473931177" />
-    <state x="465" y="26" width="998" height="952" key="SettingsEditor" timestamp="1594370327524">
+    <state x="465" y="26" width="998" height="952" key="SettingsEditor" timestamp="1594385156128">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="465" y="26" width="998" height="952" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1594370327524" />
+    <state x="465" y="26" width="998" height="952" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1594385156128" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1593596382436">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1050@0.0.1920.1050" timestamp="1593596382436" />
-    <state x="422" y="214" key="Vcs.Push.Dialog.v2" timestamp="1593950967501">
+    <state x="422" y="214" key="Vcs.Push.Dialog.v2" timestamp="1594385197181">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="422" y="214" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1593950967501" />
+    <state x="422" y="214" key="Vcs.Push.Dialog.v2/0.0.1920.1050@0.0.1920.1050" timestamp="1594385197181" />
     <state x="656" y="349" key="com.intellij.ide.util.TipDialog" timestamp="1593931859582">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

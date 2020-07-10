@@ -67,7 +67,7 @@ public class PerformanceIT {
     @BeforeEach
     void setup() {
         HttpClient client = HttpClient.newHttpClient();
-        defineInternalUserNumber = 2000;
+        defineInternalUserNumber = 50000;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/setInternalTestUser?number=" + defineInternalUserNumber))
                 .build();
@@ -98,8 +98,8 @@ public class PerformanceIT {
         System.out.println("highVolumeTrackLocation: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
         assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
     }
-/*
 
+/*
     @Test
     public void highVolumeGetRewards() {
         // ARRANGE

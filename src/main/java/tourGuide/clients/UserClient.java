@@ -10,7 +10,6 @@ import tourGuide.clients.dto.SetUserPreferences;
 import tourGuide.clients.dto.pricerreward.TripPricerTask;
 import tourGuide.clients.dto.trackerservice.Location;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
-import tourGuide.clients.dto.userservice.UserPreferences;
 import tourGuide.clients.dto.userservice.UserReward;
 
 import java.io.IOException;
@@ -193,21 +192,21 @@ public class UserClient extends SenderClient {
         return tripPricerTask;
     }
 
-    public List<UserReward> getUserRewards(String uuid) {
+    public List<String> getVisitedAttractionId(String uuid) {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getUserRewards?userId=" + uuid))
+                .uri(URI.create("http://localhost:8081/getUserRewardsId?userId=" + uuid))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);
-        List<UserReward> userRewards = new ArrayList<>();
+        List<String> attractionsId = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            userRewards = objectMapper.readValue(response.body(), List.class);
+            attractionsId = objectMapper.readValue(response.body(), List.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the getAllUsersName json response");
         }
-        return userRewards;
+        return attractionsId;
     }
 
     public int getCumulativePointsUserRewards(String userName) {
