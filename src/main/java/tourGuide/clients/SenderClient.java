@@ -16,7 +16,7 @@ public class SenderClient {
     protected HttpResponse<String> sendRequest(HttpRequest httpRequest){
         HttpResponse<String> response = null;
         try {
-            response = HttpClient.newBuilder().version(HttpClient.Version.HTTP_2).build().send(httpRequest,
+            response = HttpClient.newBuilder().build().send(httpRequest,
                     HttpResponse.BodyHandlers.ofString());
         } catch (IOException ex) {
             ex.printStackTrace();

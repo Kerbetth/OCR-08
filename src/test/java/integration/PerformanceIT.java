@@ -1,7 +1,6 @@
 package integration;
 
 
-import okhttp3.Request;
 import org.apache.commons.lang3.time.StopWatch;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import tourGuide.Application;
 import tourGuide.clients.UserClient;
+import tourGuide.clients.dto.TrackerResponse;
 import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
 import tourGuide.controller.PricerController;
@@ -67,7 +67,7 @@ public class PerformanceIT {
     @BeforeEach
     void setup() {
         HttpClient client = HttpClient.newHttpClient();
-        defineInternalUserNumber = 50000;
+        defineInternalUserNumber = 1000;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/setInternalTestUser?number=" + defineInternalUserNumber))
                 .build();
@@ -99,25 +99,21 @@ public class PerformanceIT {
         assertTrue(TimeUnit.MINUTES.toSeconds(15) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
     }
 
-/*
+
     @Test
     public void highVolumeGetRewards() {
         // ARRANGE
         StopWatch stopWatch = new StopWatch();
-
+        Attraction attraction = new Attraction("Disneyland", "Anaheim", "CA", 33.817595D, -117.922008D);
         // ACT
         stopWatch.start();
-        Attraction attraction = new Attraction("Disneyland", "Anaheim", "CA", 33.817595D, -117.922008D);
-        allUsers.forEach(u -> userController.addUserLocation(u, new VisitedLocation(UUID.randomUUID(), attraction, new Date())));
-        allUsers.forEach(u -> userController.getUserRewardsPoints(u));
-        for (UUID user : allUsers) {
-            assertTrue(userClient.getCumulativePointsUserRewards(user) > 0);
-        }
+        allUsers.forEach(u -> userController.addUserAttractionLocation(u, new TrackerResponse(new VisitedLocation(UUID.randomUUID(), attraction, new Date()),attraction)));
+        allUsers.forEach(u -> assertTrue(userController.getUserRewardSize(u) > 0));
         stopWatch.stop();
 
         //ASSERT
         System.out.println("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
         assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
     }
-*/
+
 }

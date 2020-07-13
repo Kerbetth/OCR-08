@@ -36,22 +36,12 @@ public class UserClient extends SenderClient {
             e.printStackTrace();
         }
 
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/setUserPreferences"))
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
 
-        HttpResponse<String> response = null;
-        try {
-            response = client.send(request,
-                    HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return response;
+        return sendRequest(request);
     }
 
     public void addUser(CreateUser createUser) {
@@ -64,26 +54,31 @@ public class UserClient extends SenderClient {
             e.printStackTrace();
         }
 
-        HttpRequest.newBuilder()
+        HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/addUser"))
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
+
+        sendRequest(request);
     }
 
-    public void addUserLocation(String uuid, VisitedLocation trackUserLocation) {
+    public void addUserLocation(String uuid, VisitedLocation visitedLocation) {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = null;
         try {
             requestBody = objectMapper
-                    .writeValueAsString(trackUserLocation);
+                    .writeValueAsString(visitedLocation);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
 
-        HttpRequest.newBuilder()
+        HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/addUserLocation?userId=" + uuid))
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
+
+        sendRequest(request);
     }
 
     public void addUserReward(String userID, UserReward userReward) {
@@ -96,10 +91,13 @@ public class UserClient extends SenderClient {
             e.printStackTrace();
         }
 
-        HttpRequest.newBuilder()
+        HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/addUserReward?userId=" + userID))
+                .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
+
+        sendRequest(request);
     }
 
     public UUID getUserId(String userName) {
@@ -209,9 +207,18 @@ public class UserClient extends SenderClient {
         return attractionsId;
     }
 
-    public int getCumulativePointsUserRewards(String userName) {
+    public int getCumulativePointsUserRewards(String userId) {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getUserRewards?userName=" + userName))
+                .uri(URI.create("http://localhost:8081/getCumulateRewardPoints?userId=" + userId))
+                .build();
+
+        HttpResponse<String> response = sendRequest(request);
+        return Integer.parseInt(response.body());
+    }
+
+    public int getUserRewardSize(String userId) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8081/getUserRewardSize?userId=" + userId))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);

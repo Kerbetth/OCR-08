@@ -1,6 +1,8 @@
 package tourGuide.clients.dto.userservice;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import tourGuide.clients.dto.trackerservice.Attraction;
 import tourGuide.clients.dto.trackerservice.VisitedLocation;
 
@@ -10,13 +12,8 @@ public class UserReward {
 	public final Attraction attraction;
 	private int rewardPoints;
 
-	public UserReward(VisitedLocation visitedLocation, Attraction attraction, int rewardPoints) {
-		this.visitedLocation = visitedLocation;
-		this.attraction = attraction;
-		this.rewardPoints = rewardPoints;
-	}
-	
-	public UserReward(VisitedLocation visitedLocation, Attraction attraction) {
+	@JsonCreator
+	public UserReward(@JsonProperty("visitedLocation")VisitedLocation visitedLocation, @JsonProperty("attraction")Attraction attraction) {
 		this.visitedLocation = visitedLocation;
 		this.attraction = attraction;
 	}
