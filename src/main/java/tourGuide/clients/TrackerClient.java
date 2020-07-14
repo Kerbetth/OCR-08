@@ -27,7 +27,6 @@ public class TrackerClient extends SenderClient {
 
 
     public TrackerResponse trackUserLocation(String userId, List<String> attractionId) {
-        ObjectMapper mapper = new ObjectMapper();
         String jsonAttractionId = "[]";
         if(!attractionId.isEmpty()) {
             try {
@@ -40,16 +39,14 @@ public class TrackerClient extends SenderClient {
                 .uri(URI.create(
                         "http://localhost:8082/trackUserLocation?userId=" + userId))
                 .header("Content-Type", "application/json")
-                //.version(HttpClient.Version.HTTP_1_1)
                 .POST(HttpRequest.BodyPublishers.ofString(jsonAttractionId))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         TrackerResponse trackerResponse = null;
         try {
-            trackerResponse = objectMapper.readValue(response.body(), TrackerResponse.class);
+            trackerResponse = mapper.readValue(response.body(), TrackerResponse.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the trackUserLocation json response");
@@ -58,7 +55,6 @@ public class TrackerClient extends SenderClient {
     }
 
     public FiveNearestAttractions get5NearestAttraction(Location location) {
-        ObjectMapper mapper = new ObjectMapper();
         String jsonLocation = null;
         try {
             jsonLocation = mapper.writeValueAsString(location);
@@ -75,10 +71,9 @@ public class TrackerClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         FiveNearestAttractions fiveNearestAttractions = null;
         try {
-            fiveNearestAttractions = objectMapper.readValue(response.body(), FiveNearestAttractions.class);
+            fiveNearestAttractions = mapper.readValue(response.body(), FiveNearestAttractions.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the get5NearestAttraction json response");
@@ -86,7 +81,7 @@ public class TrackerClient extends SenderClient {
         return fiveNearestAttractions;
     }
 
-    public Map<UUID, Location> getCurrentLocationOfAllUsers(List<UUID> listUserID) {
+    public Map<String, Location> getCurrentLocationOfAllUsers(List<String> listUserID) {
         String uuids = listUserID.toString();
         uuids = uuids.substring(1);
         uuids = uuids.substring(0, uuids.length() - 1);
@@ -100,10 +95,9 @@ public class TrackerClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<UUID, Location> uuidLocationMap = null;
+        Map<String, Location> uuidLocationMap = null;
         try {
-            uuidLocationMap = objectMapper.readValue(response.body(), Map.class);
+            uuidLocationMap = mapper.readValue(response.body(), Map.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the getAllCurrentLocations json response");
@@ -112,10 +106,9 @@ public class TrackerClient extends SenderClient {
     }
 
     public Set<UUID> getAllVisitedAttraction(List<VisitedLocation> visitedLocations) {
-        ObjectMapper postMapper = new ObjectMapper();
         String requestBody = null;
         try {
-            requestBody = postMapper
+            requestBody = mapper
                     .writeValueAsString(visitedLocations);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -130,10 +123,9 @@ public class TrackerClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         Set<UUID> attractions = null;
         try {
-            attractions = objectMapper.readValue(response.body(), Set.class);
+            attractions = mapper.readValue(response.body(), Set.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the get5NearestAttraction json response");
@@ -162,7 +154,6 @@ public class TrackerClient extends SenderClient {
 
     public Attraction getNewVisitedAttraction(Location location,
                                               List<UserReward> userRewards) {
-        ObjectMapper mapper = new ObjectMapper();
         String jsonReward = null;
         try {
             jsonReward = mapper.writeValueAsString(userRewards);
@@ -179,11 +170,10 @@ public class TrackerClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         Attraction attraction = null;
         if (!response.body().isEmpty()) {
             try {
-                attraction = objectMapper.readValue(response.body(), Attraction.class);
+                attraction = mapper.readValue(response.body(), Attraction.class);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
                 log.error("cannot read the get5NearestAttraction json response");

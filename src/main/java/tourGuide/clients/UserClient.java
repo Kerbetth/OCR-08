@@ -27,10 +27,9 @@ import java.util.UUID;
 public class UserClient extends SenderClient {
 
     public HttpResponse<String> setUserPreferences(SetUserPreferences pref) {
-        ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = null;
         try {
-            requestBody = objectMapper
+            requestBody = mapper
                     .writeValueAsString(pref);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -45,10 +44,9 @@ public class UserClient extends SenderClient {
     }
 
     public void addUser(CreateUser createUser) {
-        ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = null;
         try {
-            requestBody = objectMapper
+            requestBody = mapper
                     .writeValueAsString(createUser);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -63,10 +61,9 @@ public class UserClient extends SenderClient {
     }
 
     public void addUserLocation(String uuid, VisitedLocation visitedLocation) {
-        ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = null;
         try {
-            requestBody = objectMapper
+            requestBody = mapper
                     .writeValueAsString(visitedLocation);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -82,10 +79,9 @@ public class UserClient extends SenderClient {
     }
 
     public void addUserReward(String userID, UserReward userReward) {
-        ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = null;
         try {
-            requestBody = objectMapper
+            requestBody = mapper
                     .writeValueAsString(userReward);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -107,10 +103,9 @@ public class UserClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         UUID user = null;
         try {
-            user = objectMapper.readValue(response.body(), UUID.class);
+            user = mapper.readValue(response.body(), UUID.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the getUserId json response");
@@ -125,10 +120,9 @@ public class UserClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         Location location = null;
         try {
-            location = objectMapper.readValue(response.body(), Location.class);
+            location = mapper.readValue(response.body(), Location.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot send the get http request");
@@ -143,10 +137,9 @@ public class UserClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         List<String> users = new ArrayList<>();
         try {
-            users = objectMapper.readValue(response.body(), List.class);
+            users = mapper.readValue(response.body(), List.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the getUser json response");
@@ -161,10 +154,9 @@ public class UserClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         List<VisitedLocation> visitedLocations = null;
         try {
-            visitedLocations = objectMapper.readValue(response.body(), List.class);
+            visitedLocations = mapper.readValue(response.body(), List.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot send the get http request");
@@ -179,10 +171,9 @@ public class UserClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         TripPricerTask tripPricerTask = null;
         try {
-            tripPricerTask = objectMapper.readValue(response.body(), TripPricerTask.class);
+            tripPricerTask = mapper.readValue(response.body(), TripPricerTask.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the getTripPricerTask json response");
@@ -192,14 +183,13 @@ public class UserClient extends SenderClient {
 
     public List<String> getVisitedAttractionId(String uuid) {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/getUserRewardsId?userId=" + uuid))
+                .uri(URI.create("http://localhost:8081/getAttractionIds?userId=" + uuid))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);
         List<String> attractionsId = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            attractionsId = objectMapper.readValue(response.body(), List.class);
+            attractionsId = mapper.readValue(response.body(), List.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the getAllUsersName json response");
@@ -256,10 +246,9 @@ public class UserClient extends SenderClient {
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         List<String> userName = new ArrayList<>();
         try {
-            userName = objectMapper.readValue(response.body(), List.class);
+            userName = mapper.readValue(response.body(), List.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the getAllUsersName json response");

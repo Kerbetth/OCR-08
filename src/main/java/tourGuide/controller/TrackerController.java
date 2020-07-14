@@ -1,6 +1,7 @@
 package tourGuide.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,11 @@ import tourGuide.clients.TrackerClient;
 import tourGuide.clients.UserClient;
 import tourGuide.clients.dto.TrackerResponse;
 import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
+import tourGuide.clients.dto.trackerservice.Location;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class TrackerController {
@@ -35,9 +41,9 @@ public class TrackerController {
         fiveNearestAttractions.setAttractionRewardPoints(pricerClient.getAttractionRewardsPoint(fiveNearestAttractions.getAttractionName()));
         return fiveNearestAttractions;
     }
-/*
+
     @GetMapping("/getAllCurrentUserLocations")
-    public Map<UUID, Location> getAllCurrentUserLocations() {
+    public Map<String, Location> getAllCurrentUserLocations() {
         // TODO: Get a list of every user's most recent location as JSON
         //- Note: does not use gpsUtil to query for their current location,
         //        but rather gathers the user's current location from their stored location history.
@@ -48,14 +54,29 @@ public class TrackerController {
         //        ...
         //     }
         return trackerClient.getCurrentLocationOfAllUsers(userClient.getAllUsersUUID());
-    }*/
+    }
 
     @GetMapping("/trackUserLocation")
     public void trackUserLocation(@RequestParam String userID) {
-        TrackerResponse trackerResponse = trackerClient.trackUserLocation(userID, userClient.getVisitedAttractionId(userID));
+        //StopWatch stopWatch = new StopWatch();
+
+        //stopWatch.start("getVisitedAttractionId");
+        List<String> ids = userClient.getVisitedAttractionId(userID);
+        //stopWatch.stop();
+
+        //stopWatch.start("trackUserLocation");
+        TrackerResponse trackerResponse = trackerClient.trackUserLocation(userID, ids);
+        //stopWatch.stop();
+
+        //stopWatch.start("addUserLocation");
         userClient.addUserLocation(userID, trackerResponse.visitedLocation);
+        //stopWatch.stop();
+
+        //stopWatch.start("addUserLocation");
         if (trackerResponse.attraction != null) {
             userClient.addUserReward(userID, pricerClient.generateUserReward(trackerResponse));
         }
+        //stopWatch.stop();
+        //System.out.println(stopWatch.prettyPrint());
     }
 }

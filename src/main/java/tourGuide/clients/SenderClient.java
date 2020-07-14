@@ -1,6 +1,7 @@
 package tourGuide.clients;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,9 @@ import java.net.http.HttpResponse;
 @Slf4j
 @Repository
 public class SenderClient {
+
+    protected static ObjectMapper mapper = new ObjectMapper();
+
     protected HttpResponse<String> sendRequest(HttpRequest httpRequest){
         HttpResponse<String> response = null;
         try {

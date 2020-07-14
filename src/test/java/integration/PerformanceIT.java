@@ -108,7 +108,7 @@ public class PerformanceIT {
         // ACT
         stopWatch.start();
         allUsers.forEach(u -> userController.addUserAttractionLocation(u, new TrackerResponse(new VisitedLocation(UUID.randomUUID(), attraction, new Date()),attraction)));
-        allUsers.forEach(u -> assertTrue(userController.getUserRewardSize(u) > 0));
+        allUsers.forEach(u -> assertTrue(userClient.getUserRewardSize(u) > 0));
         stopWatch.stop();
 
         //ASSERT

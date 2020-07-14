@@ -21,10 +21,9 @@ import java.util.List;
 public class PricerClient extends SenderClient{
 
     public UserReward generateUserReward(TrackerResponse trackerResponse) {
-        ObjectMapper postMapper = new ObjectMapper();
         String attractionBody = null;
         try {
-            attractionBody = postMapper
+            attractionBody = mapper
                     .writeValueAsString(trackerResponse);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -38,10 +37,9 @@ public class PricerClient extends SenderClient{
 
         HttpResponse<String> response = sendRequest(request);
 
-        ObjectMapper objectMapper = new ObjectMapper();
         UserReward userReward = null;
         try {
-            userReward = objectMapper.readValue(response.body(), UserReward.class);
+            userReward = mapper.readValue(response.body(), UserReward.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the List<Provider> json response");
@@ -54,19 +52,20 @@ public class PricerClient extends SenderClient{
         attractionNameList = attractionNameList.substring(1);
         attractionNameList = attractionNameList.substring(0,attractionNameList.length()-1);
         attractionNameList = attractionNameList.replace(" ", "");
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8083/getCumulativeAttractionRewardPoints?attractionsName="+attractionNameList))
                 .build();
+
         HttpResponse<String> response = sendRequest(request);
         return Integer.parseInt(response.body());
     }
 
     public List<Provider> getTripDeals(TripPricerTask tripPricerTask, int rewards) {
 
-        ObjectMapper postMapper = new ObjectMapper();
         String requestBody = null;
         try {
-            requestBody = postMapper
+            requestBody = mapper
                     .writeValueAsString(tripPricerTask);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
@@ -81,11 +80,9 @@ public class PricerClient extends SenderClient{
                 .build();
 
         HttpResponse<String> response = sendRequest(request);
-
-        ObjectMapper objectMapper = new ObjectMapper();
         List<Provider> attractions = null;
         try {
-            attractions = objectMapper.readValue(response.body(), List.class);
+            attractions = mapper.readValue(response.body(), List.class);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             log.error("cannot read the List<Provider> json response");
