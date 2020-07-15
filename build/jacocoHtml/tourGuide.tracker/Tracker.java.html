@@ -14,39 +14,39 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-<span class="fc" id="L17">@Slf4j</span>
+<span class="nc" id="L17">@Slf4j</span>
 @Service
 public class Tracker extends Thread {
-<span class="fc" id="L20">	private static final long trackingPollingInterval = TimeUnit.MINUTES.toSeconds(5);</span>
-<span class="fc" id="L21">	private final ExecutorService executorService = Executors.newSingleThreadExecutor();</span>
-<span class="fc" id="L22">	private boolean stop = false;</span>
+<span class="nc" id="L20">	private static final long trackingPollingInterval = TimeUnit.MINUTES.toSeconds(5);</span>
+<span class="nc" id="L21">	private final ExecutorService executorService = Executors.newSingleThreadExecutor();</span>
+<span class="nc" id="L22">	private boolean stop = false;</span>
 
 	@Autowired
 	UserClient userClient;
 	@Autowired
 	TrackerClient trackerClient;
 
-<span class="fc" id="L29">	public Tracker(@Value(&quot;${isTestMode}&quot;) Boolean isTest) {</span>
-<span class="pc bpc" id="L30" title="1 of 2 branches missed.">		if(isTest){</span>
-<span class="fc" id="L31">			Runtime.getRuntime().addShutdownHook(new Thread() {</span>
+<span class="nc" id="L29">	public Tracker(@Value(&quot;${isTestMode}&quot;) Boolean isTest) {</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">		if(isTest){</span>
+<span class="nc" id="L31">			Runtime.getRuntime().addShutdownHook(new Thread() {</span>
 				public void run() {
-<span class="fc" id="L33">					stopTracking();</span>
-<span class="fc" id="L34">				}</span>
+<span class="nc" id="L33">					stopTracking();</span>
+<span class="nc" id="L34">				}</span>
 			});
-<span class="fc" id="L36">			log.debug(&quot;Tracker stopping&quot;);</span>
+<span class="nc" id="L36">			log.debug(&quot;Tracker stopping&quot;);</span>
 		}
 		else{
 <span class="nc" id="L39">			executorService.submit(this);</span>
 		}
-<span class="fc" id="L41">	}</span>
+<span class="nc" id="L41">	}</span>
 
 	/**
 	 * Assures to shut down the Tracker thread
 	 */
 	public void stopTracking() {
-<span class="fc" id="L47">		stop = true;</span>
-<span class="fc" id="L48">		executorService.shutdownNow();</span>
-<span class="fc" id="L49">	}</span>
+<span class="nc" id="L47">		stop = true;</span>
+<span class="nc" id="L48">		executorService.shutdownNow();</span>
+<span class="nc" id="L49">	}</span>
 
 	@Override
 	public void run() {

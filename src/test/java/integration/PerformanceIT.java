@@ -67,7 +67,7 @@ public class PerformanceIT {
     @BeforeEach
     void setup() {
         HttpClient client = HttpClient.newHttpClient();
-        defineInternalUserNumber = 1000;
+        defineInternalUserNumber = 10000;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8081/setInternalTestUser?number=" + defineInternalUserNumber))
                 .build();
