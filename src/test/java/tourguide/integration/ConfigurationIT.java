@@ -1,4 +1,4 @@
-package integration;
+package tourguide.integration;
 
 import org.springframework.context.annotation.Configuration;
 

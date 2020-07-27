@@ -1,4 +1,4 @@
-package tourGuide.tracker;
+package tourguide.tracker;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -6,8 +6,8 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import tourGuide.clients.TrackerClient;
-import tourGuide.clients.UserClient;
+import tourguide.clients.TrackerClient;
+import tourguide.service.UserService;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -22,11 +22,11 @@ public class Tracker extends Thread {
 	private boolean stop = false;
 
 	@Autowired
-	UserClient userClient;
+	UserService userService;
 	@Autowired
 	TrackerClient trackerClient;
 
-	public Tracker(@Value("${isTestMode}") Boolean isTest) {
+	public Tracker(@Value("${testMode}") Boolean isTest) {
 		if(isTest){
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				public void run() {
@@ -56,10 +56,10 @@ public class Tracker extends Thread {
 				log.debug("Tracker stopping");
 				break;
 			}
-			List<String> users = userClient.getAllUsersUUID();
+			List<String> users = userService.getAllUsersID();
 			log.debug("Begin Tracker. Tracking " + users.size() + " users.");
 			stopWatch.start();
-			users.forEach(u -> trackerClient.trackUserLocation(u, userClient.getVisitedAttractionId(u)));
+			users.forEach(u -> trackerClient.trackUserLocation(u));
 			stopWatch.stop();
 			log.debug("Tracker Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
 			stopWatch.reset();

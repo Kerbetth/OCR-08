@@ -1,4 +1,4 @@
-package integration;
+package tourguide.integration;
 
 
 import org.apache.commons.lang3.time.StopWatch;
@@ -6,20 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import tourGuide.Application;
-import tourGuide.clients.UserClient;
-import tourGuide.clients.dto.TrackerResponse;
-import tourGuide.clients.dto.trackerservice.Attraction;
-import tourGuide.clients.dto.trackerservice.VisitedLocation;
-import tourGuide.controller.PricerController;
-import tourGuide.controller.TrackerController;
-import tourGuide.controller.UserController;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+import tourguide.clients.dto.TrackerResponse;
+import tourguide.clients.dto.trackerservice.Attraction;
+import tourguide.clients.dto.trackerservice.VisitedLocation;
+import tourguide.controller.TrackerController;
+import tourguide.controller.UserController;
+import tourguide.service.UserService;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertTrue;
 
 
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = tourguide.Application.class)
 public class PerformanceIT {
 
     /**
@@ -52,34 +46,17 @@ public class PerformanceIT {
      **/
 
     @Autowired
-    UserClient userClient;
+    UserService userService;
     @Autowired
     UserController userController;
     @Autowired
     TrackerController trackerController;
-    @Autowired
-    PricerController pricerController;
-
-    int defineInternalUserNumber;
 
     List<String> allUsers;
 
     @BeforeEach
     void setup() {
-        HttpClient client = HttpClient.newHttpClient();
-        defineInternalUserNumber = 10000;
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/setInternalTestUser?number=" + defineInternalUserNumber))
-                .build();
-        try {
-            client.send(request,
-                    HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        allUsers = userClient.getAllUsersUUID();
+        allUsers = userService.getAllUsersID();
     }
 
     @Test
@@ -108,7 +85,8 @@ public class PerformanceIT {
         // ACT
         stopWatch.start();
         allUsers.forEach(u -> userController.addUserAttractionLocation(u, new TrackerResponse(new VisitedLocation(UUID.randomUUID(), attraction, new Date()),attraction)));
-        allUsers.forEach(u -> assertTrue(userClient.getUserRewardSize(u) > 0));
+        allUsers.forEach(u -> assertTrue(userService.getUserRewardSize(u) > 0));
+
         stopWatch.stop();
 
         //ASSERT

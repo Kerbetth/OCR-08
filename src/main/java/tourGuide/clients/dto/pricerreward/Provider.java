@@ -1,4 +1,4 @@
-package tourGuide.clients.dto.pricerreward;
+package tourguide.clients.dto.pricerreward;
 
 import java.util.UUID;
 

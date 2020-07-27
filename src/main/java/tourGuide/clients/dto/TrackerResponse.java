@@ -1,9 +1,10 @@
-package tourGuide.clients.dto;
+package tourguide.clients.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import tourGuide.clients.dto.trackerservice.Attraction;
-import tourGuide.clients.dto.trackerservice.VisitedLocation;
+import tourguide.clients.dto.trackerservice.Attraction;
+import tourguide.clients.dto.trackerservice.VisitedLocation;
+
 
 public class TrackerResponse {
     public final VisitedLocation visitedLocation;

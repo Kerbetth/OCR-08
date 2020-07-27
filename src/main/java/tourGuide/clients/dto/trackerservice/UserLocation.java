@@ -1,4 +1,5 @@
-package tourGuide.clients.dto.trackerservice;
+package tourguide.clients.dto.trackerservice;
+
 
 import java.util.UUID;
 

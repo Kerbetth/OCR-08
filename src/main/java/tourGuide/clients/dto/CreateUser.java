@@ -1,4 +1,4 @@
-package tourGuide.clients.dto;
+package tourguide.clients.dto;
 
 
 import lombok.Getter;

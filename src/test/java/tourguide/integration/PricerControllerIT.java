@@ -1,11 +1,11 @@
-package integration;
+package tourguide.integration;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
-import tourGuide.clients.dto.pricerreward.Provider;
-import tourGuide.clients.dto.trackerservice.Attraction;
-import tourGuide.controller.PricerController;
+import tourguide.clients.dto.pricerreward.Provider;
+import tourguide.clients.dto.trackerservice.Attraction;
+import tourguide.controller.PricerController;
 
 import java.util.List;
 

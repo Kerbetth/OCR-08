@@ -1,14 +1,15 @@
-package tourGuide.clients;
+package tourguide.clients;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import tourGuide.clients.dto.TrackerResponse;
-import tourGuide.clients.dto.pricerreward.Provider;
-import tourGuide.clients.dto.pricerreward.TripPricerTask;
-import tourGuide.clients.dto.userservice.UserReward;
+
+import tourguide.clients.dto.TrackerResponse;
+import tourguide.clients.dto.pricerreward.Provider;
+import tourguide.clients.dto.pricerreward.TripPricerTask;
+import tourguide.clients.dto.userservice.UserReward;
 
 import java.net.URI;
 import java.net.http.HttpRequest;

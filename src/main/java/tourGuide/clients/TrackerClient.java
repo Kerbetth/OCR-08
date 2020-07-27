@@ -1,16 +1,15 @@
-package tourGuide.clients;
+package tourguide.clients;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-import tourGuide.clients.dto.TrackerResponse;
-import tourGuide.clients.dto.trackerservice.Attraction;
-import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
-import tourGuide.clients.dto.trackerservice.Location;
-import tourGuide.clients.dto.trackerservice.VisitedLocation;
-import tourGuide.clients.dto.userservice.UserReward;
+import tourguide.clients.dto.TrackerResponse;
+import tourguide.clients.dto.trackerservice.Attraction;
+import tourguide.clients.dto.trackerservice.FiveNearestAttractions;
+import tourguide.clients.dto.trackerservice.Location;
+import tourguide.clients.dto.trackerservice.VisitedLocation;
+import tourguide.clients.dto.userservice.UserReward;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
@@ -26,20 +25,11 @@ import java.util.UUID;
 public class TrackerClient extends SenderClient {
 
 
-    public TrackerResponse trackUserLocation(String userId, List<String> attractionId) {
-        String jsonAttractionId = "[]";
-        if(!attractionId.isEmpty()) {
-            try {
-                jsonAttractionId = mapper.writeValueAsString(attractionId);
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-        }
+    public TrackerResponse trackUserLocation(String userId) {
+
         java.net.http.HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(
                         "http://localhost:8082/trackUserLocation?userId=" + userId))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonAttractionId))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);

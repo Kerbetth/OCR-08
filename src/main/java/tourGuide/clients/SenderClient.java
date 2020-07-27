@@ -1,4 +1,4 @@
-package tourGuide.clients;
+package tourguide.clients;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;

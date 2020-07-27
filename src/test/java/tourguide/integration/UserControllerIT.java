@@ -1,12 +1,13 @@
-package integration;
+package tourguide.integration;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import tourGuide.clients.dto.CreateUser;
-import tourGuide.clients.dto.pricerreward.TripPricerTask;
-import tourGuide.clients.dto.trackerservice.Location;
-import tourGuide.clients.dto.trackerservice.VisitedLocation;
-import tourGuide.controller.UserController;
+import tourguide.clients.dto.CreateUser;
+import tourguide.clients.dto.pricerreward.TripPricerTask;
+import tourguide.clients.dto.trackerservice.Location;
+import tourguide.clients.dto.trackerservice.VisitedLocation;
+import tourguide.controller.UserController;
+import tourguide.service.UserService;
 
 import java.util.Date;
 import java.util.UUID;
@@ -18,11 +19,12 @@ public class UserControllerIT {
 
     @Autowired
     UserController userController;
-
+    @Autowired
+    UserService userService;
     @Test
     public void addUser() {
         userController.addUser(new CreateUser("jon", "111","email"));
-        assertThat(userController.getUserLocation("jon")).isInstanceOf(Location.class);
+        assertThat(userService.findUserByName("jon").getUserName()).isEqualTo("jon");
     }
 /*
     @Test

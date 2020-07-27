@@ -1,12 +1,12 @@
-package integration;
+package tourguide.integration;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
-import tourGuide.clients.dto.trackerservice.Attraction;
-import tourGuide.clients.dto.trackerservice.FiveNearestAttractions;
-import tourGuide.clients.dto.trackerservice.Location;
-import tourGuide.controller.TrackerController;
+import tourguide.clients.dto.trackerservice.Attraction;
+import tourguide.clients.dto.trackerservice.FiveNearestAttractions;
+import tourguide.clients.dto.trackerservice.Location;
+import tourguide.controller.TrackerController;
 
 import java.util.Map;
 import java.util.UUID;

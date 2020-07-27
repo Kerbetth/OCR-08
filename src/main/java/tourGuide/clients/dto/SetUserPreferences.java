@@ -1,4 +1,4 @@
-package tourGuide.clients.dto;
+package tourguide.clients.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;

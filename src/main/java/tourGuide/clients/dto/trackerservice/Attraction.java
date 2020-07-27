@@ -1,4 +1,4 @@
-package tourGuide.clients.dto.trackerservice;
+package tourguide.clients.dto.trackerservice;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
