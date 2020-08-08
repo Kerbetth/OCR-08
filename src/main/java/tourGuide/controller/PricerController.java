@@ -3,8 +3,6 @@ package tourguide.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tourguide.clients.PricerClient;
-import tourguide.clients.TrackerClient;
-import tourguide.clients.UserClient;
 import tourguide.clients.dto.pricerreward.Provider;
 import tourguide.clients.dto.pricerreward.TripPricerTask;
 import tourguide.service.UserService;
@@ -19,6 +17,12 @@ public class PricerController {
     PricerClient pricerClient;
     @Autowired
     UserService userService;
+
+    /**
+     *
+     * @param userName is the name of the user send in order to get the tripdeals who fits with this user
+     * @return a list of providers with the name and the offer price
+     */
 
     @GetMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {

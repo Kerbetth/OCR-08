@@ -20,12 +20,18 @@ public class UserController {
     @Autowired
     PricerClient pricerClient;
 
+    /**
+     * set the preferences of the user by POST with a SetUserPreferences body
+     */
     @PostMapping("/setUserPreferences")
     public void setUserPreferences(@RequestParam String userId,
             @RequestBody SetUserPreferences userPreferences) {
         userService.setUserPreferences(userId, userPreferences);
     }
 
+    /**
+     * add a User With the the help of the dto object CreateUser
+     */
     @PostMapping("/addUser")
     public void addUser(@RequestBody CreateUser createUser) {
         userService.addUser(createUser);

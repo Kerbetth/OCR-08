@@ -17,10 +17,7 @@ import tourguide.util.UserUtil;
 
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -47,9 +44,7 @@ public class UserService {
         );
 
         user.setUserPreferences(userPreferences);
-        Map<UUID, User> userMap = userUtil.getInternalUserMap();
-        userMap.put(user.getUserId(), user);
-        userUtil.setInternalUserMap(userMap);
+        userUtil.getInternalUserMap().put(user.getUserId(), user);
     }
 
     public void addUser(CreateUser createUser) {
@@ -132,5 +127,15 @@ public class UserService {
 
     public int getUserRewardSize(String userId) {
         return userUtil.getInternalUserMap().get(UUID.fromString(userId)).getUserRewards().size();
+    }
+
+    public Map<String, Location> getLastLocationOfUsers() {
+        Map<String, Location> lastLocation = new HashMap<>();
+        userUtil.getInternalUserMap().values()
+                .stream().forEach(
+                        user -> lastLocation.put(
+                                user.getUserId().toString(),
+                                user.getVisitedLocations().get(user.getVisitedLocations().size()-1).location));
+        return lastLocation;
     }
 }
