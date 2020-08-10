@@ -60,7 +60,7 @@ public class UserServiceTest {
     @Test
     public void shouldReturnNoReward() {
         //ACT
-        int cumulateRewardPoints = userService.getCumulateRewardPoints(uuid.toString());
+        int cumulateRewardPoints = userService.getCumulateRewardPoints("user1");
 
         //ASSERT
         assertThat(cumulateRewardPoints).isEqualTo(0);
@@ -69,7 +69,7 @@ public class UserServiceTest {
     @Test
     public void getLocationOfAllUsersShouldReturnGoodUserLocations() {
         //ACT
-        int cumulateRewardPoints = userService.getCumulateRewardPoints(uuid.toString());
+        int cumulateRewardPoints = userService.getCumulateRewardPoints("user1");
 
         //ASSERT
         assertThat(cumulateRewardPoints).isEqualTo(0);

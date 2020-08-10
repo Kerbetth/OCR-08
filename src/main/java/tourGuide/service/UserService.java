@@ -89,7 +89,7 @@ public class UserService {
         return userUtil.getInternalUserMap().get(UUID.fromString(userId)).getVisitedLocations();
     }
 
-    public List<String> getAttractionIds(String uuid) {
+    public List<String> getVisitedAttractionIds(String uuid) {
         return userUtil.getInternalUserMap().get(UUID.fromString(uuid)).getUserRewards().stream().map(UserReward::getAttractionId)
                 .collect(Collectors.toList());
     }
@@ -119,8 +119,8 @@ public class UserService {
                 userPreferences.getTripDuration());
     }
 
-    public Integer getCumulateRewardPoints(String userId) {
-        List<UserReward> userRewards = userUtil.getInternalUserMap().get(UUID.fromString(userId)).getUserRewards();
+    public Integer getCumulateRewardPoints(String userName) {
+        List<UserReward> userRewards = userUtil.getInternalUserMap().get(findUserByName(userName).getUserId()).getUserRewards();
         return userRewards.stream().mapToInt(i -> i.getRewardPoints()).sum();
     }
 

@@ -2,7 +2,6 @@ package tourguide.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +17,6 @@ import tourguide.service.UserService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 public class TrackerController {
@@ -31,7 +29,6 @@ public class TrackerController {
     UserService userService;
 
     /**
-     *
      * @param userName is the name of the user send in order to get the five neareest attraction around him
      * @return an object FiveNearestAttraction wich contain the required information
      */
@@ -44,7 +41,6 @@ public class TrackerController {
     }
 
     /**
-     *
      * @return the last location of all users. User id as the key, and a Location object as Value {longitude, latitude}
      */
 
@@ -54,16 +50,15 @@ public class TrackerController {
     }
 
     /**
-     *
      * @return the current location of the user
      */
     @GetMapping("/trackUserLocation")
     public void trackUserLocation(@RequestParam String userId) {
         TrackerResponse trackerResponse = trackerClient.trackUserLocation(userId);
-        if(trackerResponse!=null) {
+        if (trackerResponse != null) {
             userService.addUserLocation(userId, trackerResponse.visitedLocation);
             if (trackerResponse.attraction != null) {
-                List<String> ids = userService.getAttractionIds(userId);
+                List<String> ids = userService.getVisitedAttractionIds(userId);
                 for (String id : ids) {
                     if (trackerResponse.attraction.attractionId.toString().equals(id)) {
                         break;
@@ -71,8 +66,7 @@ public class TrackerController {
                 }
             }
 
-        }
-        else throw new ResponseStatusException(
+        } else throw new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "userId does'nt exist in the database"
         );
     }

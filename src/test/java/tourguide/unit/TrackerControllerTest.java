@@ -2,7 +2,9 @@ package tourguide.unit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tourguide.clients.PricerClient;
@@ -19,10 +21,12 @@ import java.util.UUID;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(TrackerClient.class)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
+@AutoConfigureMockMvc(addFilters = false)
 public class TrackerControllerTest {
 
     @MockBean
@@ -37,7 +41,6 @@ public class TrackerControllerTest {
 
 
     @Test
-
     public void getTrackUserLocation() throws Exception {
         TrackerResponse trackerResponse =new TrackerResponse(
                 new VisitedLocation(UUID.randomUUID(),
@@ -46,11 +49,11 @@ public class TrackerControllerTest {
                 null);
         when(trackerClient.trackUserLocation(anyString())).thenReturn(trackerResponse);
 
-        this.mockMvc.perform(get("/trackUserLocation")
-                .param("userId", "aFalseId")
+        this.mockMvc.perform(get("/trackUserLocation?userId=aFalseId")
         )
                 .andExpect(status().isOk());
     }
+
     @Test
     public void shouldReturnErrorIfGetTrackUserLocationWithWrongId() throws Exception {
         this.mockMvc.perform(get("/trackUserLocation")

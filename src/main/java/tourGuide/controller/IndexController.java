@@ -1,4 +1,4 @@
-package tourGuide.controller;
+package tourguide.controller;
 
 
 import org.springframework.web.bind.annotation.*;

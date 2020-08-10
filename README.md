@@ -5,18 +5,17 @@
 2. Java 14
 
 ## What is it
-![alt text](C:\Users\dufeu\eclipse-workspace\OCR-08\TourGuide_client\src\main\resources\tourguide_flyer.png)
+![alt text](https://raw.githubusercontent.com/Kerbetth/OCR-08/feature/src/main/resources/tourguide_flyer.png "Presentation")
 
-Tourguide is an application whose repertoriate attractions worldwide, and propose interaction between these and the user like:
- 1. calculate the distance and proposing a set of nearest attraction
- 2. a historic about all 
- 3. get the level of seriousness about the health of the patient according to notes present in the Patient History (4 level : None, Borderlin, In Danger, Early onset)
-
+Tourguide is an application whose repertoriate attractions worldwide, and propose interaction between these and the user.
 ## Database
-1. A database is create automatically with dataJPA, A schema has to be created before in MySql with the name mediscreen
+1. At the state of the application, the data is generate manually inside the services in order to test the different functions.
 
 ## MicroService architecture
-1. The application is divided in four microservices, three for the three task define previously, plus a microservice which manage each request according to the enpoints send by the client.
+1. The application is divide in three microservices for the three following task:
+-managing of the User data
+-managing of the attraction data and calculate distances
+-managing of userRewards and generation of provider list according to userPreferences
 
 ## Implement a Feature
 1. Create mapping domain class and place in package com.medic.mediscreen.domain

@@ -1,4 +1,4 @@
-package tourguide.tracker;
+package tourguide.util;
 
 
 import lombok.extern.slf4j.Slf4j;
