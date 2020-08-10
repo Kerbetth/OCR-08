@@ -6,11 +6,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import tourguide.clients.dto.CreateUser;
 import tourguide.clients.dto.SetUserPreferences;
+import tourguide.clients.dto.SetUserPreferences;
 import tourguide.clients.dto.pricerreward.TripPricerTask;
 import tourguide.clients.dto.trackerservice.Location;
 import tourguide.clients.dto.trackerservice.VisitedLocation;
 import tourguide.clients.dto.userservice.UserReward;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;

@@ -6,14 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import tourguide.Application;
-import tourguide.clients.UserClient;
+
 import tourguide.clients.dto.TrackerResponse;
 import tourguide.clients.dto.trackerservice.Attraction;
 import tourguide.clients.dto.trackerservice.VisitedLocation;
-import tourguide.controller.PricerController;
 import tourguide.controller.TrackerController;
 import tourguide.controller.UserController;
+import tourguide.service.UserService;
 
 import java.io.IOException;
 import java.net.URI;
@@ -28,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.assertTrue;
 
 
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = tourguide.Application.class)
 public class PerformanceIT {
 
     /**
@@ -52,34 +51,17 @@ public class PerformanceIT {
      **/
 
     @Autowired
-    UserClient userClient;
+    UserService userService;
     @Autowired
     UserController userController;
     @Autowired
     TrackerController trackerController;
-    @Autowired
-    PricerController pricerController;
-
-    int defineInternalUserNumber;
 
     List<String> allUsers;
 
     @BeforeEach
     void setup() {
-        HttpClient client = HttpClient.newHttpClient();
-        defineInternalUserNumber = 100000;
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8081/setInternalTestUser?number=" + defineInternalUserNumber))
-                .build();
-        try {
-            client.send(request,
-                    HttpResponse.BodyHandlers.ofString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        allUsers = userClient.getAllUsersUUID();
+        allUsers = userService.getAllUsersID();
     }
 
     @Test
@@ -108,8 +90,8 @@ public class PerformanceIT {
         TrackerResponse trackerResponse = new TrackerResponse(new VisitedLocation(UUID.randomUUID(), attraction, new Date()),attraction);
         // ACT
         stopWatch.start();
-        allUsers.forEach(u -> userController.addUserAttractionLocation(u, trackerResponse));
-        allUsers.forEach(u -> assertTrue(userClient.getUserRewardSize(u) > 0));
+        allUsers.forEach(u -> userController.addUserAttractionLocation(u, new TrackerResponse(new VisitedLocation(UUID.randomUUID(), attraction, new Date()),attraction)));
+        allUsers.forEach(u -> assertTrue(userService.getUserRewardSize(u) > 0));
         stopWatch.stop();
 
         //ASSERT

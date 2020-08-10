@@ -1,9 +1,6 @@
 package tourguide.clients.dto.pricerreward;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.UUID;
 
 public class TripPricerTask {
@@ -13,15 +10,9 @@ public class TripPricerTask {
     private final int children;
     private final int nightsStay;
 
-    @JsonCreator
-    public TripPricerTask(
-            @JsonProperty("apiKey")String apiKey,
-            @JsonProperty("attractionId")UUID attractionId,
-            @JsonProperty("adults")int adults,
-            @JsonProperty("children")int children,
-            @JsonProperty("nightsStay")int nightsStay) {
+    public TripPricerTask(String apiKey, int adults, int children, int nightsStay) {
         this.apiKey = apiKey;
-        this.attractionId = attractionId;
+        this.attractionId = UUID.randomUUID();
         this.adults = adults;
         this.children = children;
         this.nightsStay = nightsStay;

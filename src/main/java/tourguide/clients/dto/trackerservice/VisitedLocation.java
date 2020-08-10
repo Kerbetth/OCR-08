@@ -12,7 +12,7 @@ public class VisitedLocation {
     public final Date timeVisited;
 
     @JsonCreator
-    public VisitedLocation(@JsonProperty("userId")UUID userId, @JsonProperty("location")Location location, @JsonProperty("timeVisited") Date timeVisited) {
+    public VisitedLocation(@JsonProperty("userId") UUID userId, @JsonProperty("location") Location location, @JsonProperty("timeVisited") Date timeVisited) {
         this.userId = userId;
         this.location = location;
         this.timeVisited = timeVisited;

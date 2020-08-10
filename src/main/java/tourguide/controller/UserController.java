@@ -2,65 +2,72 @@ package tourguide.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+
 import tourguide.clients.PricerClient;
-import tourguide.clients.UserClient;
+import tourguide.clients.TrackerClient;
 import tourguide.clients.dto.CreateUser;
 import tourguide.clients.dto.SetUserPreferences;
 import tourguide.clients.dto.TrackerResponse;
 import tourguide.clients.dto.pricerreward.TripPricerTask;
 import tourguide.clients.dto.trackerservice.Location;
-
-import java.net.http.HttpResponse;
+import tourguide.service.UserService;
 
 @RestController
 public class UserController {
 
     @Autowired
-    UserClient userClient;
+    UserService userService;
     @Autowired
     PricerClient pricerClient;
 
+    /**
+     * set the preferences of the user by POST with a SetUserPreferences body
+     */
     @PostMapping("/setUserPreferences")
-    public HttpResponse<String> setUserPreferences(
+    public void setUserPreferences(@RequestParam String userId,
             @RequestBody SetUserPreferences userPreferences) {
-        return userClient.setUserPreferences(userPreferences);
+        userService.setUserPreferences(userId, userPreferences);
     }
 
+    /**
+     * add a User With the the help of the dto object CreateUser
+     */
     @PostMapping("/addUser")
     public void addUser(@RequestBody CreateUser createUser) {
-        userClient.addUser(createUser);
+        userService.addUser(createUser);
     }
 
-    @GetMapping("/getUserLocation")
-    public Location getUserLocation(@RequestParam String userId) {
-        return userClient.getUserLocation(userId);
-    }
-
+    /**
+     * additions all reward points of the user
+     */
     @GetMapping("/getUserRewardsPoints")
     public int getCumulativePointsUserRewards(@RequestParam String userName) {
-        return userClient.getCumulativePointsUserRewards(userName);
+        return userService.getCumulateRewardPoints(userName);
     }
 
+    /**
+     * additions all reward points of the user
+     */
     @GetMapping("/getUserRewardSize")
     public int getUserRewardSize(@RequestParam String userId) {
-        return userClient.getUserRewardSize(userId);
+        return userService.getUserRewardSize(userId);
     }
 
     @GetMapping("/getTripPricerTask")
     public TripPricerTask getTripPricerTask(@RequestParam String userName) {
-        return userClient.getTripPricerTask(userName);
+        return userService.getTripPricerTask(userName);
     }
-
 
     /*********************
      * Controller for tests
      *********************/
 
-    @PostMapping("/addUserLocation")
+    @PostMapping("/addUserAttractionLocation")
     public void addUserAttractionLocation(@RequestParam String userId, @RequestBody TrackerResponse trackerResponse) {
-        userClient.addUserLocation(userId, trackerResponse.visitedLocation);
+        userService.addUserLocation(userId, trackerResponse.visitedLocation);
         if (trackerResponse.attraction != null) {
-            userClient.addUserReward(userId, pricerClient.generateUserReward(trackerResponse));
+            userService.addUserReward(userId, pricerClient.generateUserReward(trackerResponse));
         }
     }
 

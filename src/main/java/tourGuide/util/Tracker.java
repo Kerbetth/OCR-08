@@ -1,4 +1,5 @@
-package tourguide.tracker;
+package tourguide.util;
+
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tourguide.clients.TrackerClient;
-import tourguide.clients.UserClient;
+
+import tourguide.service.UserService;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -22,11 +24,11 @@ public class Tracker extends Thread {
 	private boolean stop = false;
 
 	@Autowired
-	UserClient userClient;
+	UserService userService;
 	@Autowired
 	TrackerClient trackerClient;
 
-	public Tracker(@Value("${isTestMode}") Boolean isTest) {
+	public Tracker(@Value("${testMode}") Boolean isTest) {
 		if(isTest){
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				public void run() {
@@ -56,7 +58,7 @@ public class Tracker extends Thread {
 				log.debug("Tracker stopping");
 				break;
 			}
-			List<String> users = userClient.getAllUsersUUID();
+			List<String> users = userService.getAllUsersID();
 			log.debug("Begin Tracker. Tracking " + users.size() + " users.");
 			stopWatch.start();
 			users.forEach(u -> trackerClient.trackUserLocation(u));
