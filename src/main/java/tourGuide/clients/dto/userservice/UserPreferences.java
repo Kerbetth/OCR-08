@@ -1,9 +1,10 @@
-package tourGuide.clients.dto.userservice;
+package tourguide.clients.dto.userservice;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import org.javamoney.moneta.Money;
 
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
-
-import org.javamoney.moneta.Money;
 
 
 public class UserPreferences {
@@ -16,7 +17,19 @@ public class UserPreferences {
 	private int ticketQuantity = 1;
 	private int numberOfAdults = 1;
 	private int numberOfChildren = 0;
-	
+
+	public UserPreferences(int attractionProximity, CurrencyUnit currency, Money lowerPricePoint, Money highPricePoint, int tripDuration, int ticketQuantity, int numberOfAdults, int numberOfChildren) {
+		this.attractionProximity = attractionProximity;
+		this.currency = currency;
+		this.lowerPricePoint = lowerPricePoint;
+		this.highPricePoint = highPricePoint;
+		this.tripDuration = tripDuration;
+		this.ticketQuantity = ticketQuantity;
+		this.numberOfAdults = numberOfAdults;
+		this.numberOfChildren = numberOfChildren;
+	}
+
+	@JsonCreator
 	public UserPreferences() {
 	}
 	
