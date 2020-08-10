@@ -37,11 +37,17 @@ public class UserController {
         userService.addUser(createUser);
     }
 
+    /**
+     * additions all reward points of the user
+     */
     @GetMapping("/getUserRewardsPoints")
     public int getCumulativePointsUserRewards(@RequestParam String userName) {
         return userService.getCumulateRewardPoints(userName);
     }
 
+    /**
+     * additions all reward points of the user
+     */
     @GetMapping("/getUserRewardSize")
     public int getUserRewardSize(@RequestParam String userId) {
         return userService.getUserRewardSize(userId);
