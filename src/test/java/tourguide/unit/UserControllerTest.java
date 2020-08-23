@@ -4,17 +4,14 @@ package tourguide.unit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tourguide.clients.PricerClient;
 import tourguide.clients.TrackerClient;
-import tourguide.clients.UserClient;
 import tourguide.clients.dto.TrackerResponse;
 import tourguide.clients.dto.trackerservice.Location;
 import tourguide.clients.dto.trackerservice.VisitedLocation;
-import tourguide.controller.UserController;
 import tourguide.service.UserService;
 
 import java.util.Date;
