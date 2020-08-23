@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import tourguide.clients.PricerClient;
 import tourguide.clients.TrackerClient;
-import tourguide.clients.UserClient;
 import tourguide.clients.dto.TrackerResponse;
 import tourguide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourguide.clients.dto.trackerservice.Location;
@@ -41,12 +40,11 @@ public class TrackerController {
     }
 
     /**
-     * @return the last location of all users. User id as the key, and a Location object as Value {longitude, latitude}
+     * @return Track all users and return the current location of all users. User id as the key, and a Location object as Value {longitude, latitude}
      */
-
     @GetMapping("/getAllCurrentUserLocations")
     public Map<String, Location> getAllCurrentUserLocations() {
-        return userService.getLastLocationOfUsers();
+        return trackerClient.getCurrentLocationOfAllUsers(userService.getAllUsersID());
     }
 
     /**
@@ -67,7 +65,7 @@ public class TrackerController {
             }
 
         } else throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "userId does'nt exist in the database"
+                HttpStatus.NOT_FOUND, "cannot track the user with id: "+userId
         );
     }
 }
