@@ -3,7 +3,6 @@ package tourguide.unit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -14,6 +13,7 @@ import tourguide.clients.dto.trackerservice.Attraction;
 import tourguide.clients.dto.trackerservice.Location;
 import tourguide.clients.dto.trackerservice.VisitedLocation;
 import tourguide.service.UserService;
+
 
 import java.util.Date;
 import java.util.UUID;
@@ -35,6 +35,7 @@ public class TrackerControllerTest {
     private TrackerClient trackerClient;
     @MockBean
     private UserService userService;
+
 
     @Autowired
     protected MockMvc mockMvc;

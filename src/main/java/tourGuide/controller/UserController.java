@@ -12,6 +12,8 @@ import tourguide.clients.dto.pricerreward.TripPricerTask;
 import tourguide.clients.dto.trackerservice.Location;
 import tourguide.service.UserService;
 
+import java.util.Map;
+
 @RestController
 public class UserController {
 
@@ -56,6 +58,15 @@ public class UserController {
     @GetMapping("/getTripPricerTask")
     public TripPricerTask getTripPricerTask(@RequestParam String userName) {
         return userService.getTripPricerTask(userName);
+    }
+
+    /**
+     * @return the last location of all users. User id as the key, and a Location object as Value {longitude, latitude}
+     */
+
+    @GetMapping("/getAllLastTrackedUserLocations")
+    public Map<String, Location> getAllLastTrackedUserLocations() {
+        return userService.getLastLocationOfUsers();
     }
 
     /*********************
