@@ -3,7 +3,7 @@ package tourguide.clients.dto.userservice;
 
 import lombok.Getter;
 import lombok.Setter;
-import tourguide.clients.dto.pricerreward.Provider;
+import tourguide.clients.dto.pricerservice.Provider;
 import tourguide.clients.dto.trackerservice.VisitedLocation;
 
 

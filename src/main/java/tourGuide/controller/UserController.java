@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import tourguide.clients.PricerClient;
-import tourguide.clients.TrackerClient;
 import tourguide.clients.dto.CreateUser;
 import tourguide.clients.dto.SetUserPreferences;
 import tourguide.clients.dto.TrackerResponse;
-import tourguide.clients.dto.pricerreward.TripPricerTask;
+import tourguide.clients.dto.pricerservice.TripPricerTask;
 import tourguide.clients.dto.trackerservice.Location;
 import tourguide.service.UserService;
 

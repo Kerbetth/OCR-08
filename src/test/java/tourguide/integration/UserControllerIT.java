@@ -1,25 +1,15 @@
 package tourguide.integration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import tourguide.clients.PricerClient;
 import tourguide.clients.TrackerClient;
-import tourguide.clients.dto.CreateUser;
-import tourguide.clients.dto.pricerreward.TripPricerTask;
-import tourguide.clients.dto.trackerservice.Location;
-import tourguide.clients.dto.trackerservice.VisitedLocation;
-import tourguide.controller.UserController;
 import tourguide.service.UserService;
-
-import java.util.Date;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
