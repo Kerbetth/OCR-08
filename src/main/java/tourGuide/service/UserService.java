@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tourguide.clients.dto.CreateUser;
 import tourguide.clients.dto.SetUserPreferences;
-import tourguide.clients.dto.pricerreward.TripPricerTask;
+import tourguide.clients.dto.pricerservice.TripPricerTask;
 import tourguide.clients.dto.trackerservice.Location;
 import tourguide.clients.dto.trackerservice.VisitedLocation;
 import tourguide.clients.dto.userservice.User;
