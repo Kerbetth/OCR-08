@@ -24,6 +24,7 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -54,6 +55,11 @@ public class TrackerControllerIT {
 
 	@Test
 	public void shouldReturnFiveNearestAttraction() throws Exception {
+		TrackerResponse trackerResponse =new TrackerResponse(
+				new VisitedLocation(UUID.randomUUID(),
+						new Location(1.0,1.0),
+						new Date()),
+				null);
 		List<String > attractions = new ArrayList<>();
 		attractions.add("at1");
 		attractions.add("at2");
@@ -64,6 +70,7 @@ public class TrackerControllerIT {
 		fiveNearestAttractions.setAttractionName(attractions);
 
 		when(trackerClient.get5NearestAttraction(any())).thenReturn(fiveNearestAttractions);
+		when(trackerClient.trackUserLocation(anyString())).thenReturn(trackerResponse);
 		this.mockMvc.perform(get("/getNearestAttractions")
 				.param("userName","internalUser1")
 		)

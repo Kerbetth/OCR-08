@@ -61,8 +61,8 @@ public class UserServiceIT {
     public void addUser() {
         CreateUser createUser = new CreateUser("internalUser1b");
         userService.addUser(createUser);
-        List<VisitedLocation> allVisitedLocation = userService.getAllVisitedLocation(userService.findUserByName("internalUser1b").getUserId().toString());
-        assertThat(allVisitedLocation).isEmpty();
+        User user = userService.findUserByName("internalUser1b");
+        assertThat(user.getUserName()).isEqualTo("internalUser1b");
     }
 
     @Test

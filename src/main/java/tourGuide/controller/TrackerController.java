@@ -34,6 +34,7 @@ public class TrackerController {
 
     @GetMapping("/getNearestAttractions")
     public FiveNearestAttractions getNearestAttractions(@RequestParam String userName) {
+        trackUserLocation(userService.findUserByName(userName).getUserId().toString());
         FiveNearestAttractions fiveNearestAttractions = trackerClient.get5NearestAttraction(userService.getCurrentLocation(userName));
         fiveNearestAttractions.setAttractionRewardPoints(pricerClient.getAttractionRewardsPoint(fiveNearestAttractions.getAttractionName()));
         return fiveNearestAttractions;
