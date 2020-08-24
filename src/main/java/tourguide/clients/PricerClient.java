@@ -5,8 +5,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import tourguide.clients.dto.TrackerResponse;
-import tourguide.clients.dto.pricerreward.Provider;
-import tourguide.clients.dto.pricerreward.TripPricerTask;
+import tourguide.clients.dto.pricerservice.Provider;
+import tourguide.clients.dto.pricerservice.TripPricerTask;
 import tourguide.clients.dto.userservice.UserReward;
 
 import java.net.URI;

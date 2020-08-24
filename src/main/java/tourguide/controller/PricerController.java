@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tourguide.clients.PricerClient;
-import tourguide.clients.dto.pricerreward.Provider;
-import tourguide.clients.dto.pricerreward.TripPricerTask;
+import tourguide.clients.dto.pricerservice.Provider;
+import tourguide.clients.dto.pricerservice.TripPricerTask;
 import tourguide.service.UserService;
 
 import java.util.List;
