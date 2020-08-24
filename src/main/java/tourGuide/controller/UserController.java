@@ -9,6 +9,7 @@ import tourguide.clients.dto.SetUserPreferences;
 import tourguide.clients.dto.TrackerResponse;
 import tourguide.clients.dto.pricerservice.TripPricerTask;
 import tourguide.clients.dto.trackerservice.Location;
+import tourguide.clients.dto.userservice.User;
 import tourguide.service.UserService;
 
 import java.util.Map;
@@ -24,10 +25,18 @@ public class UserController {
     /**
      * set the preferences of the user by POST with a SetUserPreferences body
      */
-    @PostMapping("/setUserPreferences")
-    public void setUserPreferences(@RequestParam String userId,
+    @PutMapping("/setUserPreferences")
+    public void setUserPreferences(@RequestParam String userName,
             @RequestBody SetUserPreferences userPreferences) {
-        userService.setUserPreferences(userId, userPreferences);
+        userService.setUserPreferences(userName, userPreferences);
+    }
+
+    /**
+     * get all user info
+     */
+    @GetMapping("/getUser")
+    public User getUser(@RequestParam String userName) {
+       return userService.findUserByName(userName);
     }
 
     /**

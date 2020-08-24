@@ -4,7 +4,10 @@ package tourguide.service;
 import lombok.extern.slf4j.Slf4j;
 import org.javamoney.moneta.Money;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 import tourguide.clients.dto.CreateUser;
 import tourguide.clients.dto.SetUserPreferences;
 import tourguide.clients.dto.pricerservice.TripPricerTask;
@@ -36,7 +39,7 @@ public class UserService {
                 preferences.getAttractionProximity(),
                 currencyUnit,
                 Money.of(preferences.getLowerPricePoint(), currencyUnit),
-                Money.of(preferences.getLowerPricePoint(), currencyUnit),
+                Money.of(preferences.getHighPricePoint(), currencyUnit),
                 preferences.getTripDuration(),
                 preferences.getTicketQuantity(),
                 preferences.getNumberOfAdults(),
@@ -48,14 +51,23 @@ public class UserService {
     }
 
     public void addUser(CreateUser createUser) {
-        User user = new User(
-                UUID.randomUUID(),
-                createUser.getUserName(),
-                createUser.getPhoneNumber(),
-                createUser.getPhoneNumber());
-        if (!userUtil.getInternalUserMap().containsKey(user.getUserName())) {
-            userUtil.getInternalUserMap().put(user.getUserId(), user);
-        }
+        if(createUser.getUserName() != null) {
+            ArrayList<VisitedLocation> vistedlocations = new ArrayList<>();
+
+            User user = new User(
+                    UUID.randomUUID(),
+                    createUser.getUserName(),
+                    createUser.getPhoneNumber(),
+                    createUser.getEmailAddress());
+            vistedlocations.add(new VisitedLocation(user.getUserId(),new Location(1.0,1.0),new Date()));
+            user.setVisitedLocations(vistedlocations);
+            if (!userUtil.getInternalUserMap().containsKey(user.getUserName())) {
+                userUtil.getInternalUserMap().put(user.getUserId(), user);
+            } else throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,
+                    "the userName"+ createUser.getUserName() +" is already in use");
+        } else throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                "The field userName needs to be specified");
+
     }
 
     public void addUserLocation(String uuid, VisitedLocation visitedLocation) {
@@ -107,6 +119,7 @@ public class UserService {
         for (User user : users) {
             userId.add(user.getUserId().toString());
         }
+        System.out.println(userId);
         return userId;
     }
 
