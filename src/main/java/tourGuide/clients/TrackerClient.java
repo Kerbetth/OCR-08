@@ -5,19 +5,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import tourguide.clients.dto.TrackerResponse;
-import tourguide.clients.dto.trackerservice.Attraction;
 import tourguide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourguide.clients.dto.trackerservice.Location;
-import tourguide.clients.dto.trackerservice.VisitedLocation;
-import tourguide.clients.dto.userservice.UserReward;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
 
 @Slf4j

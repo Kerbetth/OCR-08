@@ -10,9 +10,12 @@ import tourguide.clients.dto.pricerservice.Provider;
 import tourguide.clients.dto.pricerservice.TripPricerTask;
 import tourguide.clients.dto.userservice.UserReward;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 
@@ -47,16 +50,11 @@ public class PricerClient extends SenderClient{
         return userReward;
     }
 
-    public int getAttractionRewardsPoint(List<String> attractionName) {
-        String attractionNameList = attractionName.toString();
-        attractionNameList = attractionNameList.substring(1);
-        attractionNameList = attractionNameList.substring(0,attractionNameList.length()-1);
-        attractionNameList = attractionNameList.replace(" ", "");
-
+    public int getAttractionRewardsPoint(String attractionName) {
+        System.out.println(attractionName);
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8083/getCumulativeAttractionRewardPoints?attractionsName="+attractionNameList))
+                .uri(URI.create("http://localhost:8083/getAttractionRewardPoints?attractionName="+ URLEncoder.encode(attractionName, StandardCharsets.UTF_8)))
                 .build();
-
         HttpResponse<String> response = sendRequest(request);
         return Integer.parseInt(response.body());
     }
