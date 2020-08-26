@@ -3,6 +3,7 @@ package tourguide.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -54,7 +55,7 @@ public class TrackerController {
     /**
      * @return the current location of the user
      */
-    @GetMapping("/trackUserLocation")
+    @PutMapping("/trackUserLocation")
     public void trackUserLocation(@RequestParam String userId) {
         TrackerResponse trackerResponse = trackerClient.trackUserLocation(userId);
         if (trackerResponse != null) {
