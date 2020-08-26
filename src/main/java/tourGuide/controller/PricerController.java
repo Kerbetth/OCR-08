@@ -29,8 +29,9 @@ public class PricerController {
 
     @GetMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {
-        TripPricerTask tripPricerTask = userService.getTripPricerTask(userName);
-        int rewards = userService.getCumulateRewardPoints(userName);
-        return pricerClient.getTripDeals(tripPricerTask, rewards);
+        return pricerClient.getTripDeals(
+                userService.getTripPricerTask(userName),
+                userService.getCumulateRewardPoints(userName)
+        );
     }
 }

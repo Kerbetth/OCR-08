@@ -21,6 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -94,7 +95,7 @@ public class TrackerControllerIT {
 						new Date()),
 				null);
 		when(trackerClient.trackUserLocation(anyString())).thenReturn(trackerResponse);
-		this.mockMvc.perform(get("/trackUserLocation")
+		this.mockMvc.perform(put("/trackUserLocation")
 				.param("userId", userService.findUserByName("internalUser1").getUserId().toString())
 		)
 				.andExpect(status().isOk());

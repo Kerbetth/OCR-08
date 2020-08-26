@@ -23,6 +23,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
@@ -50,7 +51,7 @@ public class TrackerControllerTest {
                 null);
         when(trackerClient.trackUserLocation(anyString())).thenReturn(trackerResponse);
 
-        this.mockMvc.perform(get("/trackUserLocation?userId=aFalseId")
+        this.mockMvc.perform(put("/trackUserLocation?userId=aFalseId")
         )
                 .andExpect(status().isOk());
     }
