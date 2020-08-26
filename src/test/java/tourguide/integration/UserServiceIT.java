@@ -11,6 +11,7 @@ import tourguide.clients.dto.trackerservice.Attraction;
 import tourguide.clients.dto.trackerservice.Location;
 import tourguide.clients.dto.trackerservice.VisitedLocation;
 import tourguide.clients.dto.userservice.User;
+import tourguide.clients.dto.userservice.UserPreferences;
 import tourguide.clients.dto.userservice.UserReward;
 import tourguide.service.UserService;
 import tourguide.util.UserUtil;
@@ -44,14 +45,24 @@ public class UserServiceIT {
                 20, "USD", 0, 1000, 2, 2, 2, 1
         );
         userService.setUserPreferences("userTest", userPreferences);
+        UserPreferences userPreferences1 = userService.findUserByName("userTest").getUserPreferences();
+        assertThat(userPreferences1.getHighPricePoint().getCurrency().getCurrencyCode()).isEqualTo("USD");
+        assertThat(userPreferences1.getHighPricePoint().getNumber().intValueExact()).isEqualTo(1000);
+        assertThat(userPreferences1.getLowerPricePoint().getCurrency().getCurrencyCode()).isEqualTo("USD");
+        assertThat(userPreferences1.getLowerPricePoint().getNumber().intValueExact()).isEqualTo(0);
+        assertThat(userPreferences1.getNumberOfChildren()).isEqualTo(1);
+        assertThat(userPreferences1.getNumberOfAdults()).isEqualTo(2);
+        assertThat(userPreferences1.getTicketQuantity()).isEqualTo(2);
+        assertThat(userPreferences1.getTripDuration()).isEqualTo(2);
+        assertThat(userPreferences1.getAttractionProximity()).isEqualTo(20);
     }
 
     @Test
     public void addUser() {
         CreateUser createUser = new CreateUser("internalUser1b");
         userService.addUser(createUser);
-        List<VisitedLocation> allVisitedLocation = userService.getAllVisitedLocation(userService.findUserByName("internalUser1b").getUserId().toString());
-        assertThat(allVisitedLocation).isEmpty();
+        User user = userService.findUserByName("internalUser1b");
+        assertThat(user.getUserName()).isEqualTo("internalUser1b");
     }
 
     @Test

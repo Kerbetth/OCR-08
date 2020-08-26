@@ -7,16 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import tourguide.clients.PricerClient;
 import tourguide.clients.TrackerClient;
 import tourguide.clients.dto.TrackerResponse;
-import tourguide.clients.dto.trackerservice.Attraction;
-import tourguide.clients.dto.trackerservice.FiveNearestAttractions;
-import tourguide.clients.dto.trackerservice.Location;
-import tourguide.clients.dto.trackerservice.VisitedLocation;
-import tourguide.controller.TrackerController;
+import tourguide.clients.dto.trackerservice.*;
 import tourguide.service.UserService;
 
 import java.util.*;
@@ -26,6 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -54,16 +50,17 @@ public class TrackerControllerIT {
 
 	@Test
 	public void shouldReturnFiveNearestAttraction() throws Exception {
-		List<String > attractions = new ArrayList<>();
-		attractions.add("at1");
-		attractions.add("at2");
-		attractions.add("at3");
-		attractions.add("at4");
-		attractions.add("at5");
-		FiveNearestAttractions fiveNearestAttractions =new FiveNearestAttractions();
-		fiveNearestAttractions.setAttractionName(attractions);
+		TrackerResponse trackerResponse =new TrackerResponse(
+				new VisitedLocation(UUID.randomUUID(),
+						new Location(1.0,1.0),
+						new Date()),
+				null);
+		List<NearAttraction> nearAttractions = new ArrayList<>();
+		nearAttractions.add(new NearAttraction());
+		FiveNearestAttractions fiveNearestAttractions =new FiveNearestAttractions(new Location(2.0,2.0), nearAttractions);
 
 		when(trackerClient.get5NearestAttraction(any())).thenReturn(fiveNearestAttractions);
+		when(trackerClient.trackUserLocation(anyString())).thenReturn(trackerResponse);
 		this.mockMvc.perform(get("/getNearestAttractions")
 				.param("userName","internalUser1")
 		)
@@ -98,7 +95,7 @@ public class TrackerControllerIT {
 						new Date()),
 				null);
 		when(trackerClient.trackUserLocation(anyString())).thenReturn(trackerResponse);
-		this.mockMvc.perform(get("/trackUserLocation")
+		this.mockMvc.perform(put("/trackUserLocation")
 				.param("userId", userService.findUserByName("internalUser1").getUserId().toString())
 		)
 				.andExpect(status().isOk());
