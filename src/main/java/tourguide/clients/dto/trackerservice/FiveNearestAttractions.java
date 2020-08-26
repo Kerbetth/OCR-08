@@ -1,30 +1,20 @@
 package tourguide.clients.dto.trackerservice;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
 
 public class FiveNearestAttractions {
-    private List<String> attractionName;
-    private List<Location> latLongAttraction;
+
     private Location latLongUser;
-    private List<Double> distance;
-    private int attractionRewardPoints;
+    private List<NearAttraction> fiveNearestAttractions;
 
-
-    public List<String> getAttractionName() {
-        return attractionName;
-    }
-
-    public void setAttractionName(List<String> attractionName) {
-        this.attractionName = attractionName;
-    }
-
-    public List<Location> getLatLongAttraction() {
-        return latLongAttraction;
-    }
-
-    public void setLatLongAttraction(List<Location> latLongAttraction) {
-        this.latLongAttraction = latLongAttraction;
+    @JsonCreator
+    public FiveNearestAttractions(@JsonProperty("latLongUser") Location latLongUser,@JsonProperty("fiveNearestAttractions") List<NearAttraction> fiveNearestAttractions) {
+        this.latLongUser = latLongUser;
+        this.fiveNearestAttractions = fiveNearestAttractions;
     }
 
     public Location getLatLongUser() {
@@ -35,19 +25,11 @@ public class FiveNearestAttractions {
         this.latLongUser = latLongUser;
     }
 
-    public List<Double> getDistance() {
-        return distance;
+    public List<NearAttraction> getFiveNearestAttractions() {
+        return fiveNearestAttractions;
     }
 
-    public void setDistance(List<Double> distance) {
-        this.distance = distance;
-    }
-
-    public int getAttractionRewardPoints() {
-        return attractionRewardPoints;
-    }
-
-    public void setAttractionRewardPoints(int attractionRewardPoints) {
-        this.attractionRewardPoints = attractionRewardPoints;
+    public void setFiveNearestAttractions(List<NearAttraction> fiveNearestAttractions) {
+        this.fiveNearestAttractions = fiveNearestAttractions;
     }
 }

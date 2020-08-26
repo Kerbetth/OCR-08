@@ -18,11 +18,13 @@ Tourguide is an application whose repertoriate attractions worldwide, and propos
 -managing of userRewards and generation of provider list according to userPreferences
 
 ## Implement a Feature
-1. Create mapping domain class and place in package com.medic.mediscreen.domain
-2. Create repository class and place in package com.medic.mediscreen.repositories
-3. Create controller class and place in package com.medic.mediscreen.controllers
-4. Create view files and place in src/main/resource/templates
+1. Create mapping domain class and place in package com.medic.tourguide.domain
+2. Tracker and Util class place in package com.medic.tourguide.repositories
+3. controllers class place in package com.medic.tourguide.controllers
+4. services class place in package com.medic.tourguide.service
+
 
 ## Tests
-1. Create unit test and place in package com.medic.mediscreen in folder test > java
-2. Each microservice have its own tests corresponding to the service they provide (Integration and Unit tests)
+1. Performance tests
+2. Integration tests
+3. Unit tests

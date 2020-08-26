@@ -28,8 +28,8 @@ public class Tracker extends Thread {
 	@Autowired
 	TrackerClient trackerClient;
 
-	public Tracker(@Value("${testMode}") Boolean isTest) {
-		if(isTest){
+	public Tracker(@Value("${isPerformanceTest}") Boolean isPerformanceTest) {
+		if(isPerformanceTest){
 			Runtime.getRuntime().addShutdownHook(new Thread() {
 				public void run() {
 					stopTracking();

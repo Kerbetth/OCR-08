@@ -5,19 +5,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import tourguide.clients.dto.TrackerResponse;
-import tourguide.clients.dto.trackerservice.Attraction;
 import tourguide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourguide.clients.dto.trackerservice.Location;
-import tourguide.clients.dto.trackerservice.VisitedLocation;
-import tourguide.clients.dto.userservice.UserReward;
 
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
 
 @Slf4j
@@ -71,15 +66,19 @@ public class TrackerClient extends SenderClient {
     }
 
     public Map<String, Location> getCurrentLocationOfAllUsers(List<String> listUserID) {
-        String uuids = listUserID.toString();
-        uuids = uuids.substring(1);
-        uuids = uuids.substring(0, uuids.length() - 1);
-        uuids = uuids.replace(" ", "");
+        String jsonLocation = null;
+        try {
+            jsonLocation = mapper.writeValueAsString(listUserID);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
 
         java.net.http.HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(
-                        "http://localhost:8082/getCurrentLocationOfAllUsers?userId=" + uuids))
+                        "http://localhost:8082/getCurrentLocationOfAllUsers"))
                 .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonLocation))
                 .build();
 
         HttpResponse<String> response = sendRequest(request);

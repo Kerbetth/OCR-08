@@ -3,6 +3,7 @@ package tourguide.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -11,6 +12,7 @@ import tourguide.clients.TrackerClient;
 import tourguide.clients.dto.TrackerResponse;
 import tourguide.clients.dto.trackerservice.FiveNearestAttractions;
 import tourguide.clients.dto.trackerservice.Location;
+import tourguide.clients.dto.trackerservice.NearAttraction;
 import tourguide.service.UserService;
 
 
@@ -34,8 +36,11 @@ public class TrackerController {
 
     @GetMapping("/getNearestAttractions")
     public FiveNearestAttractions getNearestAttractions(@RequestParam String userName) {
+        trackUserLocation(userService.findUserByName(userName).getUserId().toString());
         FiveNearestAttractions fiveNearestAttractions = trackerClient.get5NearestAttraction(userService.getCurrentLocation(userName));
-        fiveNearestAttractions.setAttractionRewardPoints(pricerClient.getAttractionRewardsPoint(fiveNearestAttractions.getAttractionName()));
+        for (NearAttraction nearAttraction : fiveNearestAttractions.getFiveNearestAttractions()) {
+            nearAttraction.setAttractionRewardPoints(pricerClient.getAttractionRewardsPoint(nearAttraction.getAttractionName()));
+        }
         return fiveNearestAttractions;
     }
 
@@ -50,7 +55,7 @@ public class TrackerController {
     /**
      * @return the current location of the user
      */
-    @GetMapping("/trackUserLocation")
+    @PutMapping("/trackUserLocation")
     public void trackUserLocation(@RequestParam String userId) {
         TrackerResponse trackerResponse = trackerClient.trackUserLocation(userId);
         if (trackerResponse != null) {
@@ -65,7 +70,7 @@ public class TrackerController {
             }
 
         } else throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "cannot track the user with id: "+userId
+                HttpStatus.NOT_FOUND, "cannot track the user with id: " + userId
         );
     }
 }
