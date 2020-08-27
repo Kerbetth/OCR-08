@@ -12,19 +12,19 @@ Tourguide is an application whose repertoriate attractions worldwide, and propos
 1. At the state of the application, the data is generate manually inside the services in order to test the different functions.
 
 ## MicroService architecture
-1. The application is divide in three microservices for the three following task:
--managing of the User data
--managing of the attraction data and calculate distances
--managing of userRewards and generation of provider list according to userPreferences
+1. The application is divide in three microservices for the three following tasks:
+-managing of the User data and sending request to other mircroservices (microservice User)
+-managing of the attraction data and calculate distances (microservice Tracker)
+-managing of userRewards and generation of provider list according to userPreferences (microservice Pricer)
 
 ## Implement a Feature
-1. Create mapping domain class and place in package com.medic.tourguide.domain
+1. domain class place in package com.medic.tourguide.domain
 2. Tracker and Util class place in package com.medic.tourguide.repositories
 3. controllers class place in package com.medic.tourguide.controllers
 4. services class place in package com.medic.tourguide.service
 
 
 ## Tests
-1. Performance tests
+1. Performance tests (all microservices need to be activated)
 2. Integration tests
 3. Unit tests
